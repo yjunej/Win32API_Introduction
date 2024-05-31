@@ -1,8 +1,10 @@
 // Win32API_Introduction.cpp : Defines the entry point for the application.
 //
-
+#include "pch.h"
 #include "framework.h"
 #include "Win32API_Introduction.h"
+
+#include "CCore.h"
 
 #define MAX_LOADSTRING 100
 
@@ -11,7 +13,7 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
-HWND g_hWnd; // for Timer
+HWND g_hWnd; // global window handler
 
 
 // Forward declarations of functions included in this code module:
@@ -43,7 +45,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-     
+    // Initialize Core Instance
+
+   
+    if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 1280, 760 })))
+    {
+        MessageBox(nullptr, L"Failed to Initialize Core Class", L"ERROR", MB_OK);
+        return FALSE;
+    }
+
+
     // Load HotKey Table
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WIN32APIINTRODUCTION));
 
@@ -55,13 +66,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // Main message loop:
     // GetMessage: Return if Messages exist, return false if msg.message == WM_QUIT
-    while (GetMessage(&msg, nullptr, 0, 0))
+    //while (GetMessage(&msg, nullptr, 0, 0))
+
+    // PeekMessage: always return, false when no messages
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (WM_QUIT == msg.message)
+                break;
+            // Handle Message
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
+        else
+        {
+
+        }
+
     }
 
     return (int) msg.wParam;
@@ -109,19 +134,19 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    //g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
    //    CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
+   if (!g_hWnd)
    {
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(g_hWnd, nCmdShow);
+   UpdateWindow(g_hWnd);
 
    return TRUE;
 }
