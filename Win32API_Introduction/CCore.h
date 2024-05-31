@@ -3,22 +3,21 @@
 
 class CCore
 {
-public:
 	SINGLE(CCore);
 
 private:
 	HWND m_hWnd; // main window handle
-	POINT m_ptrResolution;
+	POINT m_ptrResolution; // main window resolution
+	HDC m_hDC; // main window device context
 
 
 public:
 	int Init(HWND m_hWnd, POINT m_ptrResolution);
+	void Progress();
 
 private:
-	CCore();
-	~CCore();
-	CCore(const CCore&) = delete;
-	CCore& operator=(const CCore&) = delete;
+	void update();
+	void render();
 };
 
 

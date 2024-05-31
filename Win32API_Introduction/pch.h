@@ -3,3 +3,4 @@
 // Precompiled Header
 #include <Windows.h>
 #include "define.h"
+#include "struct.h"

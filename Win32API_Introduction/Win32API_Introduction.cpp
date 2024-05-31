@@ -84,7 +84,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-
+            CCore::GetInstance()->Progress();
         }
 
     }
@@ -163,23 +163,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 
 
-#include <vector>
-
-using std::vector;
-
-struct tObjInfo
-{
-    POINT g_ptrObjPos;
-    POINT g_ptrObjScale;
-};
-
-vector<tObjInfo> g_vecInfo;
-
-POINT g_ptrLeftTop;
-POINT g_ptrRightBottom;
-
-bool bLBDown = false;
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -213,42 +196,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // Pen, Brush를 가지고 hWnd에 그리는 Device Context
  
             //GetStockObject() - 미리 만들어진 Object Get
-            HPEN hRedPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
-            HBRUSH hBlueBrush = CreateSolidBrush(RGB(0, 0, 255));
-
-
-
-            HPEN hDefaultPen = (HPEN)SelectObject(hdc, hRedPen);
-            HBRUSH hDefaultBrush = (HBRUSH)SelectObject(hdc, hBlueBrush);
-
-            SelectObject(hdc, hDefaultPen);
-            SelectObject(hdc, hDefaultBrush);
-
-            // Draw Rectangle created by current cursor
-            if (bLBDown)
-            {
-                Rectangle(hdc,
-                    g_ptrLeftTop.x,
-                    g_ptrLeftTop.y,
-                    g_ptrRightBottom.x,
-                    g_ptrRightBottom.y
-                );
-            }
-
-            for (size_t i = 0; i < g_vecInfo.size(); ++i)
-            {
-                Rectangle(hdc,
-                    g_vecInfo[i].g_ptrObjPos.x - g_vecInfo[i].g_ptrObjScale.x / 2,
-                    g_vecInfo[i].g_ptrObjPos.y - g_vecInfo[i].g_ptrObjScale.y / 2,
-                    g_vecInfo[i].g_ptrObjPos.x + g_vecInfo[i].g_ptrObjScale.x / 2,
-                    g_vecInfo[i].g_ptrObjPos.y + g_vecInfo[i].g_ptrObjScale.y / 2
-                );
-            }
-            
-
-
-            DeleteObject(hRedPen);
-            DeleteObject(hBlueBrush);
+           
+            //Rectangle(hdc, 1190, 668, 1280, 768);
 
             EndPaint(hWnd, &ps);
         }
@@ -260,77 +209,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     // Keyboard
     case WM_KEYDOWN:
     {
-
-        switch (wParam)
-        {
-
-        case 'Q':
-            //g_ptrObjScale.x -= 10;
-            //g_ptrObjScale.y -= 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-
-        case 'W':
-            //g_ptrObjScale.x += 10;
-            //g_ptrObjScale.y += 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-
-        case VK_UP:
-            //g_ptrObjPos.y -= 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-
-        case VK_LEFT:
-            //g_ptrObjPos.x -= 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-
-        case VK_DOWN:
-            //g_ptrObjPos.y += 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-
-        case VK_RIGHT:
-            //g_ptrObjPos.x += 10;
-            InvalidateRect(hWnd, nullptr, true);
-            break;
-
-
-        default:
-            break;
-        }
     }
 
     case WM_LBUTTONDOWN:
     {
-        // LPARAM <- int64 
-        g_ptrLeftTop.x = LOWORD(lParam); // Cursot X-pos
-        g_ptrLeftTop.y = HIWORD(lParam); // Cursor Y-pos
-        bLBDown = true;
-        break;
     }
 
     case WM_MOUSEMOVE:
     {
-        g_ptrRightBottom.x = LOWORD(lParam);
-        g_ptrRightBottom.y = HIWORD(lParam);
-        InvalidateRect(hWnd, nullptr, true);
-        break;
     }
 
     case WM_LBUTTONUP:
     {
-        tObjInfo objInfo = {};
-        objInfo.g_ptrObjPos.x = g_ptrLeftTop.x + (g_ptrRightBottom.x - g_ptrLeftTop.x) / 2;
-        objInfo.g_ptrObjPos.y = g_ptrLeftTop.y + (g_ptrRightBottom.y - g_ptrLeftTop.y) / 2;
-        objInfo.g_ptrObjScale.x = abs(g_ptrRightBottom.x - g_ptrLeftTop.x);
-        objInfo.g_ptrObjScale.y = abs(g_ptrRightBottom.y - g_ptrLeftTop.y);
-
-        g_vecInfo.push_back(objInfo);
-        bLBDown = false;
-        InvalidateRect(hWnd, nullptr, true);
-        break;
     }
     
     // Timer Case

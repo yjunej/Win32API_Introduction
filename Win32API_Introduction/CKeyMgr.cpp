@@ -8,3 +8,8 @@ CKeyMgr::CKeyMgr()
 CKeyMgr::~CKeyMgr()
 {
 }
+
+int CKeyMgr::Init()
+{
+	return 0;
+}
