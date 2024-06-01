@@ -20,7 +20,7 @@ public:
 	virtual void Enter() = 0; // Enter Scene
 	virtual void Exit() = 0; // Exit Scene
 
-protected:
+public:
 	void AddObject(CObject* _pObj, GROUP_TYPE _eType);
 
 public:

@@ -47,7 +47,7 @@ void CSceneMgr::Update()
 	m_pCurScene->Update();
 }
 
-void CSceneMgr::render(HDC _hdc)
+void CSceneMgr::Render(HDC _hdc)
 {
 	m_pCurScene->Render(_hdc);
 }

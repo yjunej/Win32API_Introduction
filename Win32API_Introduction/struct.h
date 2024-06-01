@@ -5,6 +5,22 @@ struct Vec2
 	float x;
 	float y;
 
+
+public:
+	float GetLength()
+	{
+		return sqrt(x * x + y * y);
+	}
+
+	Vec2& Normalize()
+	{
+		float length = GetLength();
+		assert(length != 0.f);
+		this->x /= length;
+		this->y /= length;
+		return *this;
+	}
+
 	Vec2& operator= (POINT _pt)
 	{
 		x = (float)_pt.x;

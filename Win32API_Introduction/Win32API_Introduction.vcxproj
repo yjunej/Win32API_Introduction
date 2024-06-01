@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CKeyMgr.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Win32API_Introduction.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
