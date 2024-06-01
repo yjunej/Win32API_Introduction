@@ -41,6 +41,12 @@
     <Filter Include="Engine\05. Scene\Scene_Tool">
       <UniqueIdentifier>{81b02170-343e-47c0-94ed-3c47fb75f138}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\Player">
+      <UniqueIdentifier>{3dd4cd30-111c-449b-9242-ac8b833a4f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Enemy">
+      <UniqueIdentifier>{c4a98a16-3e92-44b9-a931-6252ddd8e10c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32API_Introduction.h">
@@ -83,6 +89,12 @@
     <ClInclude Include="CScene_Start.h">
       <Filter>Engine\05. Scene\Scene_Start</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Engine\04. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemy.h">
+      <Filter>Engine\04. Object\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -106,6 +118,12 @@
     </ClCompile>
     <ClCompile Include="CScene_Start.cpp">
       <Filter>Engine\05. Scene\Scene_Start</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Engine\04. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemy.cpp">
+      <Filter>Engine\04. Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@
 
 CCore::CCore()
 	: m_hWnd(0)
-	, m_ptrResolution{}	
+	, m_ptResolution{}	
 	, m_hDC(0)
 	, m_hBmap(0)
 	, m_hSubDC(0)
@@ -24,20 +24,20 @@ CCore::~CCore()
 	DeleteObject(m_hBmap);
 }
 
-int CCore::Init(HWND _hWnd, POINT _ptrResolution)
+int CCore::Init(HWND _hWnd, POINT _ptResolution)
 {
 	m_hWnd = _hWnd;
-	m_ptrResolution = _ptrResolution;
+	m_ptResolution = _ptResolution;
 
 	// Adjust window size
-	RECT rt = { 0, 0, m_ptrResolution.x, m_ptrResolution.y };
+	RECT rt = { 0, 0, m_ptResolution.x, m_ptResolution.y };
 	AdjustWindowRect(&rt, WS_OVERLAPPED, true);
 	SetWindowPos(m_hWnd, nullptr, 100, 100, rt.right - rt.left, rt.bottom - rt.top, 0);
 
 	m_hDC = GetDC(m_hWnd);
 
 	// Double Buffering
-	m_hBmap = CreateCompatibleBitmap(m_hDC, m_ptrResolution.x, m_ptrResolution.y);
+	m_hBmap = CreateCompatibleBitmap(m_hDC, m_ptResolution.x, m_ptResolution.y);
 	m_hSubDC = CreateCompatibleDC(m_hDC);
 
 	HBITMAP hPrevBmap = (HBITMAP)SelectObject(m_hSubDC, m_hBmap);
@@ -64,9 +64,9 @@ void CCore::Progress()
 
 	
 	// Clear 
-	Rectangle(m_hSubDC, -1, -1, m_ptrResolution.x + 1, m_ptrResolution.y + 1);
+	Rectangle(m_hSubDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
 	CSceneMgr::GetInstance()->render(m_hSubDC);
-	BitBlt(m_hDC, 0, 0, m_ptrResolution.x, m_ptrResolution.y,
+	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_hSubDC, 0, 0, SRCCOPY);
 
 }
@@ -92,7 +92,7 @@ void CCore::Progress()
 //void CCore::render()
 //{
 //	// Clear 
-//	Rectangle(m_hSubDC, -1, -1, m_ptrResolution.x + 1, m_ptrResolution.y + 1);
+//	Rectangle(m_hSubDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
 //
 //
 //	Vec2 vPos = g_obj.GetPos();
@@ -105,7 +105,7 @@ void CCore::Progress()
 //		int(vPos.y + vScale.y / 2.f));
 //
 //	// Copy
-//	BitBlt(m_hDC, 0, 0, m_ptrResolution.x, m_ptrResolution.y,
+//	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
 //		m_hSubDC, 0, 0, SRCCOPY);
 //
 //}

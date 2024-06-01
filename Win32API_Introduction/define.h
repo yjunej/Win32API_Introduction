@@ -20,7 +20,7 @@ enum class GROUP_TYPE
 	DEFAULT,
 	PLAYER,
 	MISSILE,
-	MONSTER,
+	ENEMY,
 
 	END = 32,
 };

@@ -7,7 +7,7 @@ class CCore
 
 private:
 	HWND m_hWnd; // main window handle
-	POINT m_ptrResolution; // main window resolution
+	POINT m_ptResolution; // main window resolution
 	HDC m_hDC; // main window device context
 
 	HBITMAP m_hBmap;
@@ -15,15 +15,12 @@ private:
 
 
 public:
-	int Init(HWND m_hWnd, POINT m_ptrResolution);
+	int Init(HWND m_hWnd, POINT m_ptResolution);
 	void Progress();
-
-private:
-	void update();
-	void render();
 
 public:
 	HWND GetMainHwnd() { return m_hWnd; }
+	POINT GetResolution() { return m_ptResolution; }
 
 };
 
