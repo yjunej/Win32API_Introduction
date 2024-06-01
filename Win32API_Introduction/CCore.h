@@ -10,6 +10,9 @@ private:
 	POINT m_ptrResolution; // main window resolution
 	HDC m_hDC; // main window device context
 
+	HBITMAP m_hBmap;
+	HDC m_hSubDC;
+
 
 public:
 	int Init(HWND m_hWnd, POINT m_ptrResolution);
