@@ -11,3 +11,6 @@
 							~type();\
 							type(const type&) = delete;\
 							type& operator=(const type&) = delete;
+
+# define fDT CTimeMgr::GetInstance()->GetfDT()
+# define DT CTimeMgr::GetInstance()->GetfDT()
