@@ -29,6 +29,18 @@
     <Filter Include="Engine\04. Object">
       <UniqueIdentifier>{96561fc0-b568-40d7-8148-677099db8edf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\05. Scene">
+      <UniqueIdentifier>{ed9443dc-5834-4b65-a022-0e6fd4a4a5b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\SceneMgr">
+      <UniqueIdentifier>{8be3d416-fb32-4459-9ae0-de1f4e300fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene\Scene_Start">
+      <UniqueIdentifier>{6adb0dc1-1c8c-4125-81b9-2bffeedd89a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05. Scene\Scene_Tool">
+      <UniqueIdentifier>{81b02170-343e-47c0-94ed-3c47fb75f138}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32API_Introduction.h">
@@ -62,6 +74,15 @@
       <Filter>Engine\04. Object</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="CScene.h">
+      <Filter>Engine\05. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneMgr.h">
+      <Filter>Engine\03. Manager\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_Start.h">
+      <Filter>Engine\05. Scene\Scene_Start</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -76,6 +97,15 @@
     </ClCompile>
     <ClCompile Include="CObject.cpp">
       <Filter>Engine\04. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Engine\05. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneMgr.cpp">
+      <Filter>Engine\03. Manager\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Start.cpp">
+      <Filter>Engine\05. Scene\Scene_Start</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

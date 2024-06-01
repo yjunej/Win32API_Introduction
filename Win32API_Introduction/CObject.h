@@ -11,9 +11,12 @@ public:
 
 	void SetPos(Vec2 _vPos) { m_vPos = _vPos; }
 	void SetScale(Vec2 _vScale) { m_vScale = _vScale; }
+	
+	virtual void Update();
+	virtual void Render(HDC _hdc);
 
 public:
 	CObject();
-	~CObject();
+	virtual ~CObject();
 };
 
