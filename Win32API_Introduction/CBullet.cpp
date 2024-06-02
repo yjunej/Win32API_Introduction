@@ -14,6 +14,7 @@ CBullet::CBullet()
 
 CBullet::~CBullet()
 {
+	CreateCollider();
 }
 
 void CBullet::Update()

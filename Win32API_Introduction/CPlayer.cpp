@@ -14,6 +14,7 @@
 #include "CTexture.h"
 
 #include "CCore.h"
+#include "CCollider.h"
 
 // TODO
 BOOL SaveHBITMAPToFile(HBITMAP hBitmap, LPCTSTR lpszFileName)
@@ -102,10 +103,14 @@ CPlayer::CPlayer()
 {
 	// Load Texture
     m_pTexture = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\player.bmp");
+    
+    CreateCollider();
+    GetCollider()->SetScale(Vec2(100.f, 100.f));
 }
 
 CPlayer::~CPlayer()
 {
+
 }
 
 
@@ -164,6 +169,7 @@ void CPlayer::Render(HDC _hdc)
 		RGB(0, 0, 0)
 	);
 
+    RenderComponent(_hdc);
 }
 
 void CPlayer::Fire()

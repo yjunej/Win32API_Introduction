@@ -13,15 +13,23 @@ private:
 	HBITMAP m_hBmap;
 	HDC m_hSubDC;
 
+	HBRUSH m_arrBrush[(UINT)BRUSH_TYPE::END];
+	HPEN m_arrPen[(UINT)PEN_TYPE::END];
+
+
 
 public:
 	int Init(HWND m_hWnd, POINT m_ptResolution);
 	void Progress();
 
+	void CreatePaintTools();
+
 public:
-	HWND GetMainHwnd() { return m_hWnd; }
-	POINT GetResolution() { return m_ptResolution; }
-	HDC GetMainDC() { return m_hDC; }
+	HWND GetMainHwnd() const { return m_hWnd; }
+	POINT GetResolution() const { return m_ptResolution; }
+	HDC GetMainDC() const { return m_hDC; }
+	HBRUSH GetBrush(BRUSH_TYPE _eType) const { return m_arrBrush[(UINT)_eType]; }
+	HPEN GetPen(PEN_TYPE _eType) const { return m_arrPen[(UINT)_eType]; }
 
 };
 

@@ -14,6 +14,8 @@ CCore::CCore()
 	, m_hDC(0)
 	, m_hBmap(0)
 	, m_hSubDC(0)
+	, m_arrBrush{}
+	, m_arrPen{}
 {
 }
 
@@ -23,6 +25,11 @@ CCore::~CCore()
 	
 	DeleteDC(m_hSubDC);
 	DeleteObject(m_hBmap);
+
+	for (int i = 0; i < (UINT)PEN_TYPE::END; ++i)
+	{
+		DeleteObject(m_arrPen[i]);
+	}
 }
 
 int CCore::Init(HWND _hWnd, POINT _ptResolution)
@@ -44,6 +51,10 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	HBITMAP hPrevBmap = (HBITMAP)SelectObject(m_hSubDC, m_hBmap);
 	// 1pixel dummy initial bitmap 
 	DeleteObject(hPrevBmap); 
+
+
+	// Initialize Brush & Pen Tools
+	CreatePaintTools();
 
 
 	// Initialize TimeManager
@@ -69,6 +80,19 @@ void CCore::Progress()
 	CSceneMgr::GetInstance()->Render(m_hSubDC);
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_hSubDC, 0, 0, SRCCOPY);
+
+}
+
+void CCore::CreatePaintTools()
+{
+	// Brush
+	m_arrBrush[(UINT)BRUSH_TYPE::HOLLOW] = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
+
+
+	// Pen
+	m_arrPen[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+	m_arrPen[(UINT)PEN_TYPE::GREEN] = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+	m_arrPen[(UINT)PEN_TYPE::BLUE] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 
 }
 

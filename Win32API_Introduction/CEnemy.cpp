@@ -11,6 +11,7 @@ CEnemy::CEnemy()
 	, m_fPatrolDistance(50.f)
 	, m_iDirection(1)
 {
+	CreateCollider();
 }
 
 CEnemy::~CEnemy()
