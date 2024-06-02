@@ -5,6 +5,7 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
+#include "CPathMgr.h"
 
 
 CCore::CCore()
@@ -46,6 +47,7 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 
 
 	// Initialize TimeManager
+	CPathMgr::GetInstance()->Init();
 	CTimeMgr::GetInstance()->Init();
 	CKeyMgr::GetInstance()->Init();
 	CSceneMgr::GetInstance()->Init();
@@ -61,7 +63,6 @@ void CCore::Progress()
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
-
 	
 	// Clear 
 	Rectangle(m_hSubDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);

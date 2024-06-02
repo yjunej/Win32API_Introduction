@@ -6,6 +6,8 @@
 #include "CEnemy.h"
 #include "CCore.h"
 
+
+
 CScene_Start::CScene_Start()
 {
 }
@@ -16,6 +18,8 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Enter()
 {
+
+	// Add Object
 	CObject* pObj = new CPlayer;
 	
 	pObj->SetPos(Vec2(640.f, 384.f));
