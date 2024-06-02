@@ -24,7 +24,7 @@ void CScene::Update()
 	{
 		for (size_t j = 0; j < m_arrObj[i].size(); ++j)
 		{
-			m_arrObj[i][j]->PostUpdate();
+			m_arrObj[i][j]->Update();
 		}
 	}
 }
@@ -35,7 +35,7 @@ void CScene::PostUpdate()
 	{
 		for (size_t j = 0; j < m_arrObj[i].size(); ++j)
 		{
-			m_arrObj[i][j]->Update();
+			m_arrObj[i][j]->PostUpdate();
 		}
 	}
 }
