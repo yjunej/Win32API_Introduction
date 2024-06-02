@@ -2,7 +2,7 @@
 #include "CEnemy.h"
 
 #include "CTimeMgr.h"
-
+#include "CCollider.h"
 
 
 CEnemy::CEnemy()
@@ -12,6 +12,7 @@ CEnemy::CEnemy()
 	, m_iDirection(1)
 {
 	CreateCollider();
+	GetCollider()->SetScale(Vec2(40.f, 40.f));
 }
 
 CEnemy::~CEnemy()

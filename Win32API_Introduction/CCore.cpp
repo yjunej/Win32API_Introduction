@@ -6,7 +6,7 @@
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
 #include "CPathMgr.h"
-
+#include "CCollisionMgr.h"
 
 CCore::CCore()
 	: m_hWnd(0)
@@ -62,6 +62,7 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	CTimeMgr::GetInstance()->Init();
 	CKeyMgr::GetInstance()->Init();
 	CSceneMgr::GetInstance()->Init();
+	CCollisionMgr::GetInstance()->Init();
 
 	return S_OK;
 }
@@ -74,6 +75,8 @@ void CCore::Progress()
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
+	CCollisionMgr::GetInstance()->Update();
+
 	
 	// Clear 
 	Rectangle(m_hSubDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);

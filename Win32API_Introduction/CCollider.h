@@ -5,10 +5,15 @@ class CObject;
 class CCollider
 {
 private:
+
+	static UINT g_iNextID;
+
 	CObject* m_pOwner;
 	Vec2 m_vOffsetPos;
 	Vec2 m_vCollPos;
 	Vec2 m_vScale;
+
+	UINT m_iID;
 
 
 public:

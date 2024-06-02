@@ -5,7 +5,7 @@
 #include "CPlayer.h"
 #include "CEnemy.h"
 #include "CCore.h"
-
+#include "CCollisionMgr.h"
 
 
 CScene_Start::CScene_Start()
@@ -24,7 +24,7 @@ void CScene_Start::Enter()
 	
 	pObj->SetPos(Vec2(640.f, 384.f));
 	pObj->SetScale(Vec2(100.f, 100.f));
-	AddObject(pObj, GROUP_TYPE::DEFAULT);
+	AddObject(pObj, GROUP_TYPE::PLAYER);
 
 
 
@@ -37,7 +37,6 @@ void CScene_Start::Enter()
 
 	CEnemy* pEnemy = nullptr;
 
-
 	for (int i = 0; i < iNumEnemy; ++i)
 	{
 		pEnemy = new CEnemy;
@@ -45,10 +44,14 @@ void CScene_Start::Enter()
 		pEnemy->SetCenterPos(pEnemy->GetPos()); 
 		pEnemy->SetPatrolDistance(fMoveDist);
 		pEnemy->SetScale(Vec2(fObjScale, fObjScale));
-		AddObject(pEnemy, GROUP_TYPE::DEFAULT);
+		AddObject(pEnemy, GROUP_TYPE::ENEMY);
 	}
+
+	// Collision
+	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::ENEMY);
 }
 
 void CScene_Start::Exit()
 {
+	CCollisionMgr::GetInstance()->Reset();
 }
