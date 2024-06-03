@@ -13,6 +13,8 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;
 
+	// Covariant return type
+	virtual CLONE(CPlayer);
 
 private:
 	void Fire();

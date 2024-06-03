@@ -20,3 +20,11 @@ void DeleteObject(CObject* _pObj)
 	tEventInfo.lParam = (DWORD_PTR)_pObj;
 	CEventMgr::GetInstance()->AddEvent(tEventInfo);
 }
+
+void ChangeScene(SCENE_TYPE _eScene)
+{
+	tEvent tEventInfo = {};
+	tEventInfo.eEvent = EVENT_TYPE::SCENE_CHANGE;
+	tEventInfo.lParam = (DWORD_PTR)_eScene;
+	CEventMgr::GetInstance()->AddEvent(tEventInfo);
+}

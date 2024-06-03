@@ -1,6 +1,7 @@
 #pragma once
 
 class CCollider;
+class CAnimator;
 
 class CObject
 {
@@ -12,6 +13,7 @@ private:
 	Vec2 m_vScale;
 
 	CCollider* m_pCollider;
+	CAnimator* m_pAnimator;
 
 	bool m_bAlive;
 
@@ -20,6 +22,7 @@ public:
 	virtual void PostUpdate() final;
 	virtual void Render(HDC _hdc);
 
+	virtual CObject* Clone() = 0;
 
 	void CreateCollider();
 	void RenderComponent(HDC _hdc);
@@ -46,6 +49,8 @@ private:
 public:
 	CObject();
 	virtual ~CObject();
+
+	CObject(const CObject& _cobj);
 
 	friend class CEventMgr;
 

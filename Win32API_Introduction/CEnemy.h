@@ -28,6 +28,7 @@ public:
 
 public:
 	virtual void Update() override;
+	virtual CLONE(CEnemy);
 
 public:
 	CEnemy();

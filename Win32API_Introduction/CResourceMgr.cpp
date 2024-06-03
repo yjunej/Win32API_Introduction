@@ -10,11 +10,7 @@ CResourceMgr::CResourceMgr()
 
 CResourceMgr::~CResourceMgr()
 {
-    map<wstring, CTexture*>::iterator iter = m_mapTex.begin();
-    for (; iter != m_mapTex.end(); ++iter)
-    {
-        delete iter->second;
-    }
+    DeleteMapSafe<wstring, CTexture*> (m_mapTex);
 }
 
 CTexture* CResourceMgr::LoadTexture(const wstring& _strKey, const wstring& _strRelPath)
