@@ -8,6 +8,7 @@
 #include "CCollisionMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
+#include "CCamera.h"
 
 CScene_Start::CScene_Start()
 {
@@ -72,6 +73,8 @@ void CScene_Start::Enter()
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::ENEMY);
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PROJ_PLAYER, GROUP_TYPE::ENEMY);
 
+	// Set Camera
+	CCamera::GetInstance()->SetLookPos(vResolution / 2.f);
 }
 
 void CScene_Start::Exit()
