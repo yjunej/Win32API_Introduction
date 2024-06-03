@@ -63,6 +63,8 @@ void CCollisionMgr::UpdateCollisionGroup(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 	const vector<CObject*>& vecLeft = pCurScene->GetGroupObject(_eLeft);
 	const vector<CObject*>& vecRight = pCurScene->GetGroupObject(_eRight);
 
+	map<ULONGLONG, bool>::iterator iter;
+
 	for (size_t i = 0; i < vecLeft.size(); ++i)
 	{
 		if (nullptr == vecLeft[i]->GetCollider()) continue;
@@ -71,13 +73,64 @@ void CCollisionMgr::UpdateCollisionGroup(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 			if (nullptr == vecRight[j]->GetCollider() ||
 				vecLeft[i] == vecRight[j]) continue;
 
-			if (IsCollide(vecLeft[i]->GetCollider(), vecRight[j]->GetCollider()))
-			{
 
+			CCollider* pLeftColl = vecLeft[i]->GetCollider();
+			CCollider* pRightColl = vecRight[j]->GetCollider();
+
+
+			// Collision ID
+			COLLIDER_ID ID;
+			ID.iLID = pLeftColl->GetID();
+			ID.iRID = pRightColl->GetID();
+
+			iter = m_mapCollInfo.find(ID.ID);
+
+			// Collide status check
+			if (m_mapCollInfo.end() == iter)
+			{
+				m_mapCollInfo.insert(make_pair(ID.ID, false));
+				iter = m_mapCollInfo.find(ID.ID);
 			}
-			else
-			{
 
+			
+			if (IsCollide(pLeftColl, pRightColl))
+			{
+				// Collide Ongoing
+				if (iter->second)
+				{
+					if (vecLeft[i]->IsDead() || vecRight[j]->IsDead())
+					{
+						pLeftColl->OnCollisionEnd(pRightColl);
+						pRightColl->OnCollisionEnd(pLeftColl);
+						iter->second = false;
+					}
+					else
+					{
+						pLeftColl->OnCollision(pRightColl);
+						pRightColl->OnCollision(pLeftColl);
+					}
+
+				}
+				// Collide Begin Tick
+				else
+				{
+					// Ignore Collide if one of Objects supposed to delete
+					if (!vecLeft[i]->IsDead() && !vecRight[j]->IsDead())
+					{
+						pLeftColl->OnCollisionBegin(pRightColl);
+						pRightColl->OnCollisionBegin(pLeftColl);
+						iter->second = true;
+					}
+				}
+			}
+			else // No Collision
+			{
+				if (iter->second) // Collision End
+				{
+					pLeftColl->OnCollisionEnd(pRightColl);
+					pRightColl->OnCollisionEnd(pLeftColl);
+					iter->second = false;
+				}
 			}
 
 		}
@@ -86,7 +139,18 @@ void CCollisionMgr::UpdateCollisionGroup(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 
 }
 
-bool CCollisionMgr::IsCollide(CCollider* _pLeftCol, CCollider* _pRightCol)
+bool CCollisionMgr::IsCollide(CCollider* _pLeftColl, CCollider* _pRightColl)
 {
+	Vec2 vLeftPos = _pLeftColl->GetCollPos();
+	Vec2 vLeftScale = _pLeftColl->GetScale();
+	Vec2 vRightPos = _pRightColl->GetCollPos();
+	Vec2 vRightScale = _pRightColl->GetScale();
+
+	if (abs(vRightPos.x - vLeftPos.x) < (vLeftScale.x + vRightScale.x) / 2.f &&
+		abs(vRightPos.y - vLeftPos.y) < (vLeftScale.y + vRightScale.y) / 2.f)
+	{
+		return true;
+	}
+
 	return false;
 }
