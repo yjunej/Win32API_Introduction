@@ -2,6 +2,7 @@
 #include "CObject.h"
 
 #include "CCollider.h"
+#include "CAnimator.h"
 
 CObject::CObject()
 	: m_vPos{}
@@ -38,6 +39,12 @@ CObject::CObject(const CObject& _cobj)
 		m_pCollider->m_pOwner = this;
 	}
 
+	if (nullptr != _cobj.m_pAnimator)
+	{
+		m_pAnimator = new CAnimator(*_cobj.m_pAnimator);
+		m_pAnimator->m_pOwner = this;
+	}
+
 }
 
 
@@ -67,10 +74,21 @@ void CObject::CreateCollider()
 	m_pCollider->m_pOwner = this;
 }
 
+void CObject::CreateAnimator()
+{
+	m_pAnimator = new CAnimator;
+	m_pAnimator->m_pOwner = this;
+
+}
+
 void CObject::RenderComponent(HDC _hdc)
 {
 	if (nullptr != m_pCollider)
 	{
 		m_pCollider->Render(_hdc);
+	}
+	if (nullptr != m_pAnimator)
+	{
+		m_pAnimator->Render(_hdc);
 	}
 }

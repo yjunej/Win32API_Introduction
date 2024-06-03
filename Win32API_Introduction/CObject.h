@@ -25,6 +25,7 @@ public:
 	virtual CObject* Clone() = 0;
 
 	void CreateCollider();
+	void CreateAnimator();
 	void RenderComponent(HDC _hdc);
 	bool IsDead() const { return !m_bAlive; }
 
@@ -36,6 +37,7 @@ public:
 	Vec2 GetPos() const { return m_vPos; }
 	Vec2 GetScale() const { return m_vScale; }
 	CCollider* GetCollider() const { return m_pCollider; }
+	CAnimator* GetAnimator() const { return m_pAnimator; }
 	const wstring& GetName() const { return m_strName; }
 
 	void SetPos(Vec2 _vPos) { m_vPos = _vPos; }

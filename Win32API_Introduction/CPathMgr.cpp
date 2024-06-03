@@ -14,7 +14,7 @@ CPathMgr::~CPathMgr()
 void CPathMgr::Init()
 {
 	GetCurrentDirectory(255, m_szContentPath);
-	int iLength = wcslen(m_szContentPath);
+	int iLength = (int)wcslen(m_szContentPath);
 
 	// Parent Path
 	for (int i = iLength - 1; i >= 0; --i)

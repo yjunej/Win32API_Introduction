@@ -1,13 +1,14 @@
 #pragma once
 
 class CTexture;
+class CResource;
 
 class CResourceMgr
 {
 	SINGLE(CResourceMgr);
 
 private:
-	map<wstring, CTexture*> m_mapTex;
+	map<wstring, CResource*> m_mapTex;
 	
 
 public:

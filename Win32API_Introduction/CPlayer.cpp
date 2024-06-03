@@ -15,17 +15,26 @@
 
 #include "CCore.h"
 #include "CCollider.h"
+#include "CAnimator.h"
+#include "CAnimation.h"
 
 
 CPlayer::CPlayer()
-	: m_pTexture(nullptr)
 {
-	// Load Texture
-    m_pTexture = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\player.bmp");
     
     CreateCollider();
 	GetCollider()->SetOffsetPos(Vec2(-2.f, 5.f));
     GetCollider()->SetScale(Vec2(30.f, 50.f));
+
+	// Load Texture
+	CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\galaga.bmp");
+
+	CreateAnimator();
+	GetAnimator()->CreateAnimation(L"TEST", pTex, Vec2(4.f, 4.f), Vec2(64.f, 64.f), Vec2(72.f, 0.f), 0.2f,7);
+	GetAnimator()->Play(L"TEST", true);
+
+	//CAnimation* pAnim = GetAnimator()->FindAnimation(L"TEST");
+	//pAnim->GetFrame(0).vOffset = Vec2(0.f, -20.f);
 }
 
 CPlayer::~CPlayer()
@@ -59,14 +68,13 @@ void CPlayer::Update()
 	}
 
 	SetPos(vPos);
+	GetAnimator()->Update();
 }
 
 void CPlayer::Render(HDC _hdc)
 {
-	int iWidth = (int)m_pTexture->GetWidth();
-	int iHeight = (int)m_pTexture->GetHeight();
 
-	Vec2 vPos = GetPos();
+	//Vec2 vPos = GetPos();
 
 	/*BitBlt(_hdc,
 		int(vPos.x - (float)(iWidth / 2)),
@@ -80,14 +88,14 @@ void CPlayer::Render(HDC _hdc)
 
     //SaveHBITMAPToFile(CreateCompatibleBitmap(_hdc, CCore::GetInstance()->GetResolution().x, CCore::GetInstance()->GetResolution().y), L"t.bmp");
 
-	TransparentBlt(_hdc,
-		int(vPos.x - (float)(iWidth / 2)),
-		int(vPos.y - (float)(iHeight / 2)),
-		iWidth, iHeight,
-		m_pTexture->GetDC(),
-		0, 0, iWidth, iHeight,
-		RGB(0, 0, 0)
-	);
+	//TransparentBlt(_hdc,
+	//	int(vPos.x - (float)(iWidth / 2)),
+	//	int(vPos.y - (float)(iHeight / 2)),
+	//	iWidth, iHeight,
+	//	m_pTexture->GetDC(),
+	//	0, 0, iWidth, iHeight,
+	//	RGB(0, 0, 0)
+	//);
 
     RenderComponent(_hdc);
 }

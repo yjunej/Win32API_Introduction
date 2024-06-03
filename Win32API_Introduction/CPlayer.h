@@ -7,7 +7,7 @@ class CPlayer : public CObject
 {
 
 private:
-		CTexture* m_pTexture;
+		//CTexture* m_pTexture;
 
 public:
 	virtual void Update() override;

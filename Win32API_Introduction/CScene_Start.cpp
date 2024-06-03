@@ -39,13 +39,12 @@ void CScene_Start::Enter()
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
 	// Copy Player Example
-	//CObject* pOtherPlayer = new CPlayer(*(CPlayer*)pObj);
 
-	CObject* pOtherPlayer = pObj->Clone();
-	pOtherPlayer->SetPos(Vec2(
-		pOtherPlayer->GetPos().x + pOtherPlayer->GetScale().x,
-		pOtherPlayer->GetPos().y));
-	AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+	//CObject* pOtherPlayer = pObj->Clone();
+	//pOtherPlayer->SetPos(Vec2(
+	//	pOtherPlayer->GetPos().x + pOtherPlayer->GetScale().x,
+	//	pOtherPlayer->GetPos().y));
+	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 
 

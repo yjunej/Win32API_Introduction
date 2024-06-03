@@ -10,7 +10,7 @@ CResourceMgr::CResourceMgr()
 
 CResourceMgr::~CResourceMgr()
 {
-    DeleteMapSafe<wstring, CTexture*> (m_mapTex);
+    DeleteMapSafe<wstring, CResource*> (m_mapTex);
 }
 
 CTexture* CResourceMgr::LoadTexture(const wstring& _strKey, const wstring& _strRelPath)
@@ -19,7 +19,7 @@ CTexture* CResourceMgr::LoadTexture(const wstring& _strKey, const wstring& _strR
     if (nullptr != pTexture)
     {
         return pTexture;
-    }
+    }   
 
     wstring strPath = CPathMgr::GetInstance()->GetContentPath();
     strPath += _strRelPath;
@@ -37,10 +37,10 @@ CTexture* CResourceMgr::LoadTexture(const wstring& _strKey, const wstring& _strR
 
 CTexture* CResourceMgr::FindTexture(const wstring& _strKey)
 {
-    map<wstring, CTexture*>::iterator iter = m_mapTex.find(_strKey);
+    map<wstring, CResource*>::iterator iter = m_mapTex.find(_strKey);
     if (iter == m_mapTex.end())
     {
         return nullptr;
     }
-    return iter->second;
+    return (CTexture*)iter->second;
 }

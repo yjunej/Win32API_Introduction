@@ -21,7 +21,7 @@ public:
 
 private:
 	CTexture();
-	~CTexture();
+	virtual ~CTexture();
 
 	friend class CResourceMgr;
 

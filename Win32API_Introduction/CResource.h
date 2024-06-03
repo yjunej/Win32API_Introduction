@@ -15,7 +15,7 @@ public:
 
 public:
 	CResource();
-	~CResource();
+	virtual ~CResource();
 		
 };
 
