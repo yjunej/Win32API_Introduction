@@ -2,6 +2,7 @@
 #include "CBullet.h"
 
 #include "CTimeMgr.h"
+#include "CCollider.h"
 
 
 CBullet::CBullet()
@@ -10,11 +11,12 @@ CBullet::CBullet()
 	, m_vDirection(Vec2(1.f, 1.f))
 {
 	m_vDirection.Normalize();
+	CreateCollider();
+	GetCollider()->SetScale(Vec2(15.f, 15.f));
 }
 
 CBullet::~CBullet()
 {
-	CreateCollider();
 }
 
 void CBullet::Update()
@@ -41,5 +43,15 @@ void CBullet::Render(HDC _hdc)
 		(int)(vPos.x + vScale.x / 2.f),
 		(int)(vPos.y + vScale.y / 2.f)
 	);
+
+	RenderComponent(_hdc);
 }
 
+void CBullet::OnCollisionBegin(CCollider* _pOther)
+{
+	CObject* pOtherObj = _pOther->GetOwner();
+	if (pOtherObj->GetName() == L"Enemy")
+	{
+		DeleteObject(this);
+	}
+}

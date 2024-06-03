@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "CCore.h"
 
-#include "CObject.h"
+//#include "CObject.h"
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
 #include "CPathMgr.h"
 #include "CCollisionMgr.h"
+#include "CEventMgr.h"
 
 CCore::CCore()
 	: m_hWnd(0)
@@ -70,18 +71,27 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 
 void CCore::Progress()
 {
-	// Update Managers
+	// =====================
+	// || Update Managers ||
+	// =====================
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
 	CCollisionMgr::GetInstance()->Update();
 
-	
-	// Clear 
+	// ===============
+	// || Rendering ||
+	// =============== 
 	Rectangle(m_hSubDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
 	CSceneMgr::GetInstance()->Render(m_hSubDC);
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
 		m_hSubDC, 0, 0, SRCCOPY);
+
+
+	// ==========================
+	// || Event Delay Handling ||
+	// ==========================
+	CEventMgr::GetInstance()->Update();
 
 }
 

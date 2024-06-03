@@ -99,10 +99,13 @@ void CPlayer::Fire()
 
 	// Create Object
 	CBullet* pBullet = new CBullet;
+	pBullet->SetName(L"PlayerBullet");
 	pBullet->SetPos(vPos);
 	pBullet->SetScale(Vec2(25.f, 25.f));
-	pBullet->SetDirection(Vec2(-5.f, -5.f));
+	pBullet->SetDirection(Vec2(0.f, -1.f));
 
-	CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
-	pCurScene->AddObject(pBullet, GROUP_TYPE::DEFAULT);
+	// Deprecated - Manage by EventMGr
+	//CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
+	//pCurScene->AddObject(pBullet, GROUP_TYPE::DEFAULT);
+	CreateObject(pBullet, GROUP_TYPE::PROJ_PLAYER);
 }

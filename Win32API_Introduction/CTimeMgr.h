@@ -22,7 +22,7 @@ public:
 	void Update();
 
 public:
-	double GetDT() { return m_dDT; }
-	float GetfDT() { return (float)m_dDT; }
+	double GetDT() const { return m_dDT; }
+	float GetfDT() const { return (float)m_dDT; }
 };
 

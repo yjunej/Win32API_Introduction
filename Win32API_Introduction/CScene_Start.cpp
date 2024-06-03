@@ -28,7 +28,7 @@ void CScene_Start::Enter()
 
 
 
-	int iNumEnemy = 16;
+	int iNumEnemy = 2;
 	float fMoveDist = 25.f;
 	float fObjScale = 50.f;
 
@@ -40,6 +40,7 @@ void CScene_Start::Enter()
 	for (int i = 0; i < iNumEnemy; ++i)
 	{
 		pEnemy = new CEnemy;
+		pEnemy->SetName(L"Enemy");
 		pEnemy->SetPos(Vec2((fMoveDist + fObjScale / 2.f) + (float)i * fInterval, 50.f));
 		pEnemy->SetCenterPos(pEnemy->GetPos()); 
 		pEnemy->SetPatrolDistance(fMoveDist);
@@ -49,6 +50,8 @@ void CScene_Start::Enter()
 
 	// Collision
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::ENEMY);
+	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PROJ_PLAYER, GROUP_TYPE::ENEMY);
+
 }
 
 void CScene_Start::Exit()

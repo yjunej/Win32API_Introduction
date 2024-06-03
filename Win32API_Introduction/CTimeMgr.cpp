@@ -44,4 +44,12 @@ void CTimeMgr::Update()
 		m_dTT = 0;
 		m_iCallCount = 0;
 	}
+
+#ifdef _DEBUG
+	if (m_dDT > (1. / 60.))
+	{
+		m_dDT = 1. / 60.;
+	}
+#endif // DEBUG
+
 }

@@ -146,7 +146,9 @@
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="CEventMgr.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="func.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectGDI.h" />
@@ -171,6 +173,8 @@
     <ClCompile Include="CScene_Start.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
+    <ClCompile Include="CEventMgr.cpp" />
+    <ClCompile Include="func.cpp" />
     <ClCompile Include="SelectGDI.cpp" />
     <ClCompile Include="Win32API_Introduction.cpp" />
   </ItemGroup>
