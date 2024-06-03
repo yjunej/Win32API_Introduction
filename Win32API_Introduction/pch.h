@@ -22,3 +22,4 @@ using std::make_pair;
 
 #include "define.h"
 #include "struct.h"
+#include "func.h"
