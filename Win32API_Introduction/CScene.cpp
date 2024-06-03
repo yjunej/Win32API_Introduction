@@ -44,6 +44,7 @@ void CScene::PostUpdate()
 }
 
 
+
 void CScene::Render(HDC _hdc)
 {
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
@@ -69,4 +70,17 @@ void CScene::Render(HDC _hdc)
 void CScene::AddObject(CObject* _pObj, GROUP_TYPE _eType)
 {
 	m_arrObj[(UINT)_eType].push_back(_pObj);
+}
+
+void CScene::DeleteGroup(GROUP_TYPE _eType)
+{
+	DeleteVectorSafe<CObject*> (m_arrObj[(UINT)_eType]);
+}
+
+void CScene::DeleteAll()
+{
+	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
+	{
+		DeleteGroup((GROUP_TYPE)i);
+	}
 }

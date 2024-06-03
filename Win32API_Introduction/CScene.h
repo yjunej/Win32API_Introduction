@@ -13,7 +13,7 @@ public:
 	void SetName(const wstring& _strName) { m_strName =		_strName; }
 	const wstring& GetName() { return m_strName; }
 
-	void Update();
+	virtual void Update();
 	void PostUpdate();
 	void Render(HDC _hdc);
 
@@ -24,6 +24,8 @@ public:
 public:
 	void AddObject(CObject* _pObj, GROUP_TYPE _eType);
 	const vector<CObject*>& GetGroupObject(GROUP_TYPE _eType) const { return m_arrObj[(UINT)_eType]; }
+	void DeleteGroup(GROUP_TYPE _eType);
+	void DeleteAll();
 
 public:
 	CScene();

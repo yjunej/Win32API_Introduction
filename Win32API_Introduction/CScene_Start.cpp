@@ -6,7 +6,8 @@
 #include "CEnemy.h"
 #include "CCore.h"
 #include "CCollisionMgr.h"
-
+#include "CKeyMgr.h"
+#include "CSceneMgr.h"
 
 CScene_Start::CScene_Start()
 {
@@ -14,6 +15,17 @@ CScene_Start::CScene_Start()
 
 CScene_Start::~CScene_Start()
 {
+}
+
+void CScene_Start::Update()
+{
+	CScene::Update();
+
+	if (KEY_TAP(KEY::ENTER))
+	{
+		ChangeScene(SCENE_TYPE::TOOL);
+	}
+
 }
 
 void CScene_Start::Enter()
@@ -25,6 +37,15 @@ void CScene_Start::Enter()
 	pObj->SetPos(Vec2(640.f, 384.f));
 	pObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
+
+	// Copy Player Example
+	//CObject* pOtherPlayer = new CPlayer(*(CPlayer*)pObj);
+
+	CObject* pOtherPlayer = pObj->Clone();
+	pOtherPlayer->SetPos(Vec2(
+		pOtherPlayer->GetPos().x + pOtherPlayer->GetScale().x,
+		pOtherPlayer->GetPos().y));
+	AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 
 
@@ -56,5 +77,6 @@ void CScene_Start::Enter()
 
 void CScene_Start::Exit()
 {
+	DeleteAll();
 	CCollisionMgr::GetInstance()->Reset();
 }
