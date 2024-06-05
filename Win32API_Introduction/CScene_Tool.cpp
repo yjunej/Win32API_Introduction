@@ -29,7 +29,7 @@ void CScene_Tool::Update()
 	SetTileIdx();
 	if (KEY_TAP(KEY::LSHIFT))
 	{
-		SaveTileData();
+		ChangeScene(SCENE_TYPE::START);
 	}
 	if (KEY_TAP(KEY::CTRL))
 	{

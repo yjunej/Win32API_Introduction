@@ -28,12 +28,12 @@ CPlayer::CPlayer()
 
 	// Load Texture
 	//CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\galaga.bmp");
-	CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"texture\\B_witch_run.bmp");
+	CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"texture\\RedHoodAttack.bmp");
 
 
 	CreateAnimator();
 	//GetAnimator()->CreateAnimation(L"TEST", pTex, Vec2(4.f, 4.f), Vec2(64.f, 64.f), Vec2(72.f, 0.f), 0.2f,7);
-	GetAnimator()->CreateAnimation(L"TEST", pTex, Vec2(0.f, 0.f), Vec2(32.f, 48.f), Vec2(0.f, 48.f), 0.2f,8);
+	GetAnimator()->CreateAnimation(L"TEST", pTex, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.03f, 26);
 
 	GetAnimator()->Play(L"TEST", true);
 
