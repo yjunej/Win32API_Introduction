@@ -16,9 +16,11 @@ private:
 public:
 	Vec2 GetUIPos() const { return m_vUIPos; }
 	CUI* GetParent() { return m_pParentUI; }
+	const vector<CUI*>& GetChildren() const { return m_vecChildUI; }
 	void AddChild(CUI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }
-	bool IsMouseHovered() { return m_bMouseHovered; }
-	
+	bool IsMouseHovered() const { return m_bMouseHovered; }
+	bool IsLBPressed() const { return m_bLBPressed; }
+
 private:
 	void CheckHovered();
 
@@ -36,12 +38,14 @@ public:
 	virtual void OnMouseLBReleased();
 	virtual void OnMouseLBClicked();
 
-
-	CLONE(CUI)
+	virtual CUI* Clone() = 0;
 
 public:
 	CUI(bool _bFollowCam);
+	CUI(const CUI& _cUI);
+	
 	virtual ~CUI();
+
 
 	friend class CUIMgr;
 };

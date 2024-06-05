@@ -7,6 +7,12 @@ struct Vec2
 
 
 public:
+	bool IsZero() const
+	{
+		if (x == 0.f && y == 0.f)
+			return true;
+		return false;
+	}
 	float GetLength()
 	{
 		return sqrt(x * x + y * y);

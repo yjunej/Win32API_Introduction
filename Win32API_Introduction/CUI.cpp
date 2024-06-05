@@ -3,12 +3,27 @@
 #include "CKeyMgr.h"
 #include "CCamera.h"
 
+#include "SelectGDI.h"
+
 CUI::CUI(bool _bCamDetached)
 	: m_pParentUI(nullptr)
 	, m_bCamDetached(_bCamDetached)
 	, m_bMouseHovered(false)
 	, m_bLBPressed(false)
 {
+}
+
+CUI::CUI(const CUI& _cUI)
+	: CObject(_cUI)
+	, m_pParentUI(nullptr)
+	, m_bCamDetached(_cUI.m_bCamDetached)
+	, m_bMouseHovered(false) 
+	, m_bLBPressed(false)
+{
+	for (size_t i = 0; i < _cUI.m_vecChildUI.size(); i++)
+	{
+		this->AddChild(_cUI.m_vecChildUI[i]->Clone());
+	}
 }
 
 CUI::~CUI()
@@ -94,6 +109,20 @@ void CUI::Render(HDC _hdc)
 		vPos = CCamera::GetInstance()->ScreenPosToRenderPos(vPos);
 	}
 
+	if (m_bLBPressed)
+	{
+		SelectGDI select(_hdc, PEN_TYPE::GREEN);
+		Rectangle(
+			_hdc,
+			(int)vPos.x,
+			(int)vPos.y,
+			(int)(vPos.x + vScale.x),
+			(int)(vPos.y + vScale.y));
+	}
+	else
+	{
+
+	
 
 	Rectangle(
 		_hdc,
@@ -101,7 +130,7 @@ void CUI::Render(HDC _hdc)
 		(int)vPos.y,
 		(int)(vPos.x + vScale.x),
 		(int)(vPos.y + vScale.y));
-
+	}	
 	RenderChildren(_hdc);
 }
 

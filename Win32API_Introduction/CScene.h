@@ -34,6 +34,9 @@ public:
 public:
 	void AddObject(CObject* _pObj, GROUP_TYPE _eType);
 	const vector<CObject*>& GetGroupObject(GROUP_TYPE _eType) const { return m_arrObj[(UINT)_eType]; }
+	vector<CObject*>& GetUIGroupObject() { return m_arrObj[(UINT)GROUP_TYPE::UI]; }
+
+
 	void DeleteGroup(GROUP_TYPE _eType);
 	void DeleteAll();
 

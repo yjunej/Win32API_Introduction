@@ -6,10 +6,13 @@
 #include "CCore.h"
 #include "CResourceMgr.h"
 #include "CSceneMgr.h"
-#include "CUI.h"
+
+#include "CPanelUI.h"
+#include "CButtonUI.h"
 
 #include "resource.h"
 
+void ChangeToStartScene(DWORD_PTR, DWORD_PTR);
 
 CScene_Tool::CScene_Tool()
 {
@@ -34,18 +37,27 @@ void CScene_Tool::Enter()
 	Vec2 vResolution = CCore::GetInstance()->GetResolution();
 
 
-	CUI* pUI = new CUI(false);
+	CUI* pPanelUI = new CPanelUI;
+	pPanelUI->SetName(L"ParentUI");
+	pPanelUI->SetScale(Vec2(500.f, 300.f));
+	pPanelUI->SetPos(Vec2(vResolution.x - pPanelUI->GetScale().x, 0.f));
 
-	pUI->SetScale(Vec2(500.f, 300.f));
-	pUI->SetPos(Vec2(vResolution.x - pUI->GetScale().x, 0.f));
+	CButtonUI* pButtonUI = new CButtonUI;
+	pButtonUI->SetName(L"ChildUI");
+	pButtonUI->SetScale(Vec2(100.f, 40.f));
+	pButtonUI->SetPos(Vec2(0.f, 0.f));
+	//pButtonUI->SetClickCallback(ChangeToStartScene, 0, 0);
 
-	//CUI* pChildUI = new CUI;
-	//pChildUI->SetScale(Vec2(100.f, 40.f));
-	//pChildUI->SetPos(Vec2(0.f, 0.f));
+	pPanelUI->AddChild(pButtonUI);
 
-	//pUI->AddChild(pChildUI);
+	AddObject(pPanelUI, GROUP_TYPE::UI);
 
-	AddObject(pUI, GROUP_TYPE::UI);
+	CUI* pClonePanelUI = (CUI*)pPanelUI->Clone();
+	pClonePanelUI->SetPos(pClonePanelUI->GetPos() + Vec2(-100.f, 0.f));
+	((CButtonUI*)(pClonePanelUI->GetChildren()[0]))->SetClickCallback(ChangeToStartScene, 0, 0);
+
+	AddObject(pClonePanelUI, GROUP_TYPE::UI);
+
 
 	// Move Camera
 	CCamera::GetInstance()->SetLookPos(vResolution / 2.f);
@@ -53,6 +65,7 @@ void CScene_Tool::Enter()
 
 void CScene_Tool::Exit()
 {
+	DeleteAll();
 }
 
 void CScene_Tool::SetTileIdx()
@@ -79,6 +92,11 @@ void CScene_Tool::SetTileIdx()
 		((CTile*)vecTile[iIdx])->IncImgIdx();
 	}
 	
+}
+
+void ChangeToStartScene(DWORD_PTR, DWORD_PTR)
+{
+	ChangeScene(SCENE_TYPE::START);
 }
 
 

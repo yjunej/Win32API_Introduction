@@ -8,6 +8,9 @@
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CBullet.cpp"
 
 
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CButtonUI.cpp"
+
+
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CCamera.cpp"
 
 
@@ -24,19 +27,4 @@
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CKeyMgr.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CObject.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CPathMgr.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CPlayer.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CResource.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CResourceMgr.cpp"
 

@@ -95,6 +95,12 @@
     <Filter Include="Engine\03. Manager\UIMgr">
       <UniqueIdentifier>{6ba632f8-380f-499f-a494-60eb77b4af02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\UI\PanelUI">
+      <UniqueIdentifier>{b7113262-f279-4cc2-885a-913a08335b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\UI\ButtonUI">
+      <UniqueIdentifier>{3e429429-1e56-4a08-998f-3ee90d4ca92e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32API_Introduction.h">
@@ -197,6 +203,12 @@
     <ClInclude Include="CUIMgr.h">
       <Filter>Engine\03. Manager\UIMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CPanelUI.h">
+      <Filter>Engine\04. Object\UI\PanelUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CButtonUI.h">
+      <Filter>Engine\04. Object\UI\ButtonUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -277,6 +289,12 @@
     </ClCompile>
     <ClCompile Include="CUIMgr.cpp">
       <Filter>Engine\03. Manager\UIMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CPanelUI.cpp">
+      <Filter>Engine\04. Object\UI\PanelUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CButtonUI.cpp">
+      <Filter>Engine\04. Object\UI\ButtonUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
