@@ -79,7 +79,7 @@ void CCollisionMgr::UpdateCollisionGroup(GROUP_TYPE _eLeft, GROUP_TYPE _eRight)
 
 
 			// Collision ID
-			COLLIDER_ID ID;
+			COLLIDER_ID ID = {};
 			ID.iLID = pLeftColl->GetID();
 			ID.iRID = pRightColl->GetID();
 

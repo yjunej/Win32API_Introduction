@@ -48,7 +48,9 @@ void CAnimation::Render(HDC _hdc)
 	Vec2 vObjPos = pObj->GetPos();
 
 	vObjPos += m_vecFrm[m_iCurFrm].vOffset;
-
+	
+	// Convert to Rendering position
+	vObjPos = CCamera::GetInstance()->ScreenPosToRenderPos(vObjPos);
 
 	TransparentBlt(
 		_hdc,
@@ -76,7 +78,7 @@ void CAnimation::Create(CTexture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vSte
 	{
 		frm.fDuration = _fDuration;
 		frm.vSlice = _vSliceSize;
-		frm.vLT = _vLT + _vStep * i;
+		frm.vLT = _vLT + _vStep * (float)i;
 		
 		m_vecFrm.push_back(frm);
 	}

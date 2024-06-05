@@ -10,6 +10,8 @@ public:
 	virtual void Enter() override;
 	virtual void Exit() override;
 
+	void SetTileIdx();
+
 public:
 	CScene_Tool();
 	~CScene_Tool();

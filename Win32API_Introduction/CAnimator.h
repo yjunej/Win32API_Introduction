@@ -19,6 +19,7 @@ public:
 	void Play(const wstring& _strName, bool bLoop);
 
 	void Update();
+	void PostUpdate();
 	void Render(HDC _hdc);
 
 	CObject* GetOwner() const { return m_pOwner; }

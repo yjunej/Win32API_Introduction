@@ -3,6 +3,7 @@
 
 #include "CTimeMgr.h"
 #include "CCollider.h"
+#include "CCamera.h"
 
 
 CBullet::CBullet()
@@ -36,12 +37,14 @@ void CBullet::Render(HDC _hdc)
 	Vec2 vPos = GetPos();
 	Vec2 vScale = GetScale();
 
+	Vec2 vRenserPos = CCamera::GetInstance()->ScreenPosToRenderPos(vPos);
+
 	Ellipse(
 		_hdc,
-		(int)(vPos.x - vScale.x / 2.f),
-		(int)(vPos.y - vScale.y / 2.f),
-		(int)(vPos.x + vScale.x / 2.f),
-		(int)(vPos.y + vScale.y / 2.f)
+		(int)(vRenserPos.x - vScale.x / 2.f),
+		(int)(vRenserPos.y - vScale.y / 2.f),
+		(int)(vRenserPos.x + vScale.x / 2.f),
+		(int)(vRenserPos.y + vScale.y / 2.f)
 	);
 
 	RenderComponent(_hdc);

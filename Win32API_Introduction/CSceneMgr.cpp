@@ -37,7 +37,7 @@ int CSceneMgr::Init()
 
 
 	// Select Scene
-	m_pCurScene = m_arrScene[(UINT)SCENE_TYPE::START];
+	m_pCurScene = m_arrScene[(UINT)SCENE_TYPE::TOOL];
 	m_pCurScene->Enter();
 
 	return S_OK;

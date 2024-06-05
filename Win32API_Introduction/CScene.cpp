@@ -2,8 +2,14 @@
 #include "CScene.h"
 
 #include "CObject.h"
+#include "CTexture.h"
+#include "CResourceMgr.h"
+#include "CTile.h"
+
 
 CScene::CScene()
+	:m_iXTileCount(0)
+	,m_iYTileCount(0)
 {
 }
 
@@ -82,5 +88,26 @@ void CScene::DeleteAll()
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
 	{
 		DeleteGroup((GROUP_TYPE)i);
+	}
+}
+
+void CScene::CreateTile(UINT _iXCount, UINT _iYCount)
+{
+	m_iXTileCount = _iXCount;
+	m_iYTileCount = _iYCount;
+
+	CTexture * pTileTex = CResourceMgr::GetInstance()->LoadTexture(
+		L"Tile", L"\\texture\\tile\\SereneVillageTile32.bmp");
+
+	// Create Tile
+	for (UINT i = 0 ; i <_iYCount; ++i)
+	{
+		for (UINT j = 0; j < _iXCount; ++j)
+		{
+			CTile* pTile = new CTile;
+			pTile->SetPos(Vec2((float)(j * TILE_SIZE), (float)(i * TILE_SIZE)));
+			pTile->SetTexture(pTileTex);
+			AddObject(pTile, GROUP_TYPE::TILE);
+		}
 	}
 }

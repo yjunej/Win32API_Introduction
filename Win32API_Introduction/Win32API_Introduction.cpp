@@ -1,6 +1,6 @@
 // Win32API_Introduction.cpp : Defines the entry point for the application.
 //
-#include "pch.h"
+#include "global.h"
 #include "framework.h"
 #include "Win32API_Introduction.h"
 
@@ -164,12 +164,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - post a quit message and return
 //
 //
-
+INT_PTR CALLBACK TileCountProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+   
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -179,6 +180,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;
+
+            case ID_MENU_TILE:
+            {
+                INT_PTR iReturn = DialogBox(hInst, MAKEINTRESOURCE(IDD_TILE_COUNT), hWnd, TileCountProc);
+                break;
+            }
+
+
             case IDM_EXIT:
                 DestroyWindow(hWnd);
                 break;

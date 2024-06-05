@@ -28,6 +28,9 @@
 #define KEY_NONE(key) KEY_CHECK(key, KEY_STATE::NONE)
 
 #define PI 3.1415926535f
+#define MOUSE_POS CKeyMgr::GetInstance()->GetCurMousePos()
+
+#define TILE_SIZE 32
 
 enum class GROUP_TYPE
 {
@@ -36,7 +39,9 @@ enum class GROUP_TYPE
 	ENEMY,
 	PROJ_PLAYER,
 	PROJ_ENEMY,
+	TILE,
 
+	UI = 31,
 	END = 32,
 };
 

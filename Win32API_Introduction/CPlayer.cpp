@@ -27,10 +27,14 @@ CPlayer::CPlayer()
     GetCollider()->SetScale(Vec2(30.f, 50.f));
 
 	// Load Texture
-	CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\galaga.bmp");
+	//CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\galaga.bmp");
+	CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\B_witch_run.bmp");
+
 
 	CreateAnimator();
-	GetAnimator()->CreateAnimation(L"TEST", pTex, Vec2(4.f, 4.f), Vec2(64.f, 64.f), Vec2(72.f, 0.f), 0.2f,7);
+	//GetAnimator()->CreateAnimation(L"TEST", pTex, Vec2(4.f, 4.f), Vec2(64.f, 64.f), Vec2(72.f, 0.f), 0.2f,7);
+	GetAnimator()->CreateAnimation(L"TEST", pTex, Vec2(0.f, 0.f), Vec2(32.f, 48.f), Vec2(0.f, 48.f), 0.2f,8);
+
 	GetAnimator()->Play(L"TEST", true);
 
 	//CAnimation* pAnim = GetAnimator()->FindAnimation(L"TEST");

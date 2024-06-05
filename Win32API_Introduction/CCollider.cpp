@@ -3,6 +3,7 @@
 
 #include "CObject.h"
 #include "CCore.h"
+#include "CCamera.h"
 
 #include "SelectGDI.h"
 
@@ -47,12 +48,14 @@ void CCollider::Render(HDC _hdc)
 	SelectGDI _n0(_hdc, ePenType);
 	SelectGDI _n1(_hdc, eBrushType);
 
+	Vec2 vRenderPos = CCamera::GetInstance()->ScreenPosToRenderPos(m_vCollPos);
+
 	Rectangle(
 		_hdc,
-		(int)(m_vCollPos.x - m_vScale.x / 2.f),
-		(int)(m_vCollPos.y - m_vScale.y / 2.f),
-		(int)(m_vCollPos.x + m_vScale.x / 2.f),
-		(int)(m_vCollPos.y + m_vScale.y / 2.f)
+		(int)(vRenderPos.x - m_vScale.x / 2.f),
+		(int)(vRenderPos.y - m_vScale.y / 2.f),
+		(int)(vRenderPos.x + m_vScale.x / 2.f),
+		(int)(vRenderPos.y + m_vScale.y / 2.f)
 	);
 
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "global.h"
 
 #include "CCamera.h"
 
@@ -21,7 +22,7 @@ private:
 
 public:
 	virtual void Update() = 0;
-	virtual void PostUpdate() final;
+	virtual void PostUpdate();
 	virtual void Render(HDC _hdc);
 
 	virtual CObject* Clone() = 0;

@@ -8,6 +8,8 @@
 #include "CPathMgr.h"
 #include "CCollisionMgr.h"
 #include "CEventMgr.h"
+#include "CCamera.h"
+#include "CUIMgr.h"
 
 CCore::CCore()
 	: m_hWnd(0)
@@ -76,8 +78,10 @@ void CCore::Progress()
 	// =====================
 	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
+	CCamera::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
 	CCollisionMgr::GetInstance()->Update();
+	CUIMgr::GetInstance()->Update();
 
 	// ===============
 	// || Rendering ||

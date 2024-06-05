@@ -48,6 +48,10 @@ public:
 	{
 		return Vec2(x * (float)_i, y * (float)_i);
 	}
+	Vec2 operator *(float _i)
+	{
+		return Vec2(x * _i, y * _i);
+	}
 	void operator +=(Vec2 _vOther)
 	{
 		x += _vOther.x;

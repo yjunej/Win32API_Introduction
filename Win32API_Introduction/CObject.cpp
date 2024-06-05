@@ -54,11 +54,16 @@ void CObject::PostUpdate()
 	{
 		m_pCollider->PostUpdate();
 	}
+
+	if (nullptr != m_pAnimator)
+	{
+		m_pAnimator->PostUpdate();
+	}
 }
 
 void CObject::Render(HDC _hdc)
 {
-	Vec2 vRenderPos = CCamera::GetInstance()->GetRenderPos(m_vPos);
+	Vec2 vRenderPos = CCamera::GetInstance()->ScreenPosToRenderPos(m_vPos);
 	Rectangle(
 		_hdc, 
 		(int)(vRenderPos.x - m_vScale.x / 2.f),

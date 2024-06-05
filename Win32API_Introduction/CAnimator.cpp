@@ -47,6 +47,11 @@ void CAnimator::Play(const wstring& _strName, bool bLoop)
 
 void CAnimator::Update()
 {
+
+}
+
+void CAnimator::PostUpdate()
+{
 	if (nullptr != m_pCurAnim)
 	{
 		m_pCurAnim->Update();

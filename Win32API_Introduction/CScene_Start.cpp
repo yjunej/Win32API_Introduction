@@ -27,6 +27,13 @@ void CScene_Start::Update()
 		ChangeScene(SCENE_TYPE::TOOL);
 	}
 
+	if (KEY_TAP(KEY::LBTN))
+	{
+		Vec2 vFocusPos = CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS);
+		CCamera::GetInstance()->SetLookPos(vFocusPos);
+
+	}
+
 }
 
 void CScene_Start::Enter()
@@ -47,7 +54,8 @@ void CScene_Start::Enter()
 	//	pOtherPlayer->GetPos().y));
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
-
+	// Camera Follow Player
+	//CCamera::GetInstance()->SetFocus(pObj);
 
 	int iNumEnemy = 2;
 	float fMoveDist = 25.f;
