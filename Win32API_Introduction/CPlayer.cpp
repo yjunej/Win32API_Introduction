@@ -28,7 +28,7 @@ CPlayer::CPlayer()
 
 	// Load Texture
 	//CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\galaga.bmp");
-	CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\B_witch_run.bmp");
+	CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"texture\\B_witch_run.bmp");
 
 
 	CreateAnimator();

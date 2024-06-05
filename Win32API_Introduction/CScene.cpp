@@ -5,6 +5,7 @@
 #include "CTexture.h"
 #include "CResourceMgr.h"
 #include "CTile.h"
+#include "CPathMgr.h"
 
 
 CScene::CScene()
@@ -93,6 +94,9 @@ void CScene::DeleteAll()
 
 void CScene::CreateTile(UINT _iXCount, UINT _iYCount)
 {
+
+	DeleteGroup(GROUP_TYPE::TILE);
+
 	m_iXTileCount = _iXCount;
 	m_iYTileCount = _iYCount;
 
@@ -110,4 +114,32 @@ void CScene::CreateTile(UINT _iXCount, UINT _iYCount)
 			AddObject(pTile, GROUP_TYPE::TILE);
 		}
 	}
+}
+
+void CScene::LoadTile(const wstring& _strRelPath)
+{
+	wstring strAbsFilePath = CPathMgr::GetInstance()->GetContentPath();
+	strAbsFilePath += _strRelPath;
+
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, strAbsFilePath.c_str(), L"rb");
+	assert(pFile);
+
+	UINT iXCount = 0;
+	UINT iYCount = 0;
+
+	fread(&iXCount, sizeof(UINT), 1, pFile);
+	fread(&iYCount, sizeof(UINT), 1, pFile);
+
+	CreateTile(iXCount, iYCount);
+
+	const vector<CObject*>& vecTile = GetGroupObject(GROUP_TYPE::TILE);
+
+	for (size_t i = 0; i < vecTile.size(); i++)
+	{
+		((CTile*)vecTile[i])->Load(pFile);
+	}
+
+	
+	fclose(pFile);
 }

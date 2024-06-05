@@ -9,6 +9,7 @@
 
 #include "CPanelUI.h"
 #include "CButtonUI.h"
+#include "CPathMgr.h"
 
 #include "resource.h"
 
@@ -26,6 +27,14 @@ void CScene_Tool::Update()
 {
 	CScene::Update();
 	SetTileIdx();
+	if (KEY_TAP(KEY::LSHIFT))
+	{
+		SaveTileData();
+	}
+	if (KEY_TAP(KEY::CTRL))
+	{
+		LoadTileData();
+	}
 }
 
 void CScene_Tool::Enter()
@@ -54,7 +63,7 @@ void CScene_Tool::Enter()
 
 	CUI* pClonePanelUI = (CUI*)pPanelUI->Clone();
 	pClonePanelUI->SetPos(pClonePanelUI->GetPos() + Vec2(-100.f, 0.f));
-	((CButtonUI*)(pClonePanelUI->GetChildren()[0]))->SetClickCallback(ChangeToStartScene, 0, 0);
+	((CButtonUI*)(pClonePanelUI->GetChildren()[0]))->SetClickCallback(this, (SCENE_MEMFUNC) & CScene_Tool::SaveTileData);
 
 	AddObject(pClonePanelUI, GROUP_TYPE::UI);
 
@@ -92,6 +101,82 @@ void CScene_Tool::SetTileIdx()
 		((CTile*)vecTile[iIdx])->IncImgIdx();
 	}
 	
+}
+
+void CScene_Tool::SaveTileData()
+{
+	OPENFILENAME ofn = {};
+	wchar_t szName[256] = {};
+
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = CCore::GetInstance()->GetMainHwnd();
+	ofn.lpstrFile = szName;
+	ofn.nMaxFile = sizeof(szName);
+	ofn.lpstrFilter = L"ALL\0*.*\0Tile\0*.tile\0";
+	ofn.nFilterIndex = 0;
+	ofn.lpstrFileTitle = nullptr;
+	ofn.nMaxFileTitle = 0;
+
+	wstring strTileFolder = CPathMgr::GetInstance()->GetContentPath();
+	strTileFolder += L"tile";
+
+	ofn.lpstrInitialDir = strTileFolder.c_str();
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	if (GetSaveFileName(&ofn))
+	{
+		SaveTile(szName);
+	}
+}
+
+void CScene_Tool::LoadTileData()
+{
+	OPENFILENAME ofn = {};
+	wchar_t szName[256] = {};
+
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = CCore::GetInstance()->GetMainHwnd();
+	ofn.lpstrFile = szName;
+	ofn.nMaxFile = sizeof(szName);
+	ofn.lpstrFilter = L"ALL\0*.*\0Tile\0*.tile\0";
+	ofn.nFilterIndex = 0;
+	ofn.lpstrFileTitle = nullptr;
+	ofn.nMaxFileTitle = 0;
+
+	wstring strTileFolder = CPathMgr::GetInstance()->GetContentPath();
+	strTileFolder += L"tile";
+
+	ofn.lpstrInitialDir = strTileFolder.c_str();
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	if (GetOpenFileName(&ofn))
+	{
+		wstring strRelPath = CPathMgr::GetInstance()->AbsToRelPath(szName);
+		LoadTile(strRelPath);
+	}
+}
+
+void CScene_Tool::SaveTile(const wstring& _strAbsPath)
+{
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, _strAbsPath.c_str(), L"wb");
+	assert(pFile);
+
+	UINT iXCount = GetXTileCount();
+	UINT iYCount = GetYTileCount();
+
+	fwrite(&iXCount, sizeof(UINT), 1, pFile);
+	fwrite(&iYCount, sizeof(UINT), 1, pFile);
+
+	const vector<CObject*>& vecTile = GetGroupObject(GROUP_TYPE::TILE);
+
+	for (size_t i = 0; i < vecTile.size(); i++)
+	{
+		((CTile*)vecTile[i])->Save(pFile);
+	}
+
+
+	fclose(pFile);
 }
 
 void ChangeToStartScene(DWORD_PTR, DWORD_PTR)

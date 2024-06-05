@@ -77,6 +77,10 @@ void CScene_Start::Enter()
 		AddObject(pEnemy, GROUP_TYPE::ENEMY);
 	}
 
+	// LoadTile
+	//LoadTile(L"Tile\\Start.tile");
+
+
 	// Collision
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::ENEMY);
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PROJ_PLAYER, GROUP_TYPE::ENEMY);

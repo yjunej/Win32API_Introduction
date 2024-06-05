@@ -4,6 +4,7 @@
 
 CPathMgr::CPathMgr()
 	: m_szContentPath{}
+	, m_szRelativePath{}
 {
 }
 
@@ -26,8 +27,21 @@ void CPathMgr::Init()
 		}
 	}
 
-	wcscat_s(m_szContentPath, 255, L"\\Release\\Content");
+	wcscat_s(m_szContentPath, 255, L"\\Release\\Content\\");
 
 	SetWindowText(CCore::GetInstance()->GetMainHwnd(), m_szContentPath);
 
+}
+
+wstring CPathMgr::AbsToRelPath(const wchar_t* _absPath)
+{
+	wstring strFilePath = _absPath;
+	
+	size_t iAbsLen = wcslen(m_szContentPath);
+	size_t iFullLen = strFilePath.length();
+
+	wstring strRelPath = strFilePath.substr(iAbsLen, iFullLen - iAbsLen);
+
+
+	return strRelPath;
 }
