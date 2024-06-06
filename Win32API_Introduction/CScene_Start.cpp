@@ -87,6 +87,11 @@ void CScene_Start::Enter()
 
 	// Set Camera
 	CCamera::GetInstance()->SetLookPos(vResolution / 2.f);
+
+	// Camera Effect
+	CCamera::GetInstance()->FadeOut(4.f);
+	CCamera::GetInstance()->FadeIn(4.f);
+
 }
 
 void CScene_Start::Exit()
