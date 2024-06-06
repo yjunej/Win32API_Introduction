@@ -26,6 +26,7 @@ public:
 	virtual void Update();
 	void PostUpdate();
 	void Render(HDC _hdc);
+	void RenderTile(HDC _hdc);
 
 
 	virtual void Enter() = 0; // Enter Scene

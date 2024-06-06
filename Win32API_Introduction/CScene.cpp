@@ -6,7 +6,8 @@
 #include "CResourceMgr.h"
 #include "CTile.h"
 #include "CPathMgr.h"
-
+#include "CCamera.h"
+#include "CCore.h"
 
 CScene::CScene()
 	:m_iXTileCount(0)
@@ -56,6 +57,14 @@ void CScene::Render(HDC _hdc)
 {
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
 	{
+		if ((UINT)GROUP_TYPE::TILE == i)
+		{
+			RenderTile(_hdc);
+			continue;
+			// Implement Dead State Check if Needs
+		}
+
+
 		vector<CObject*>::iterator iter = m_arrObj[i].begin();
 
 		for (;iter != m_arrObj[i].end();)
@@ -71,6 +80,37 @@ void CScene::Render(HDC _hdc)
 			}
 		}
 	}
+}
+
+void CScene::RenderTile(HDC _hdc)
+{
+
+	const vector<CObject*>& vecTile = GetGroupObject(GROUP_TYPE::TILE);
+
+	Vec2 vRes = CCore::GetInstance()->GetResolution();
+	Vec2 vCamPos = CCamera::GetInstance()->GetCurLookPos();
+
+	Vec2 vLeftTop = vCamPos - vRes / 2.f;
+
+	int iLeftTopTileCol = (int)vLeftTop.x / (int)TILE_SIZE;
+	int iLeftTopTileRow = (int)vLeftTop.y / (int)TILE_SIZE;
+
+	int iNumTilesInViewX = ((int)vRes.x / (int)TILE_SIZE)+1;
+	int iNumTilesInViewY = ((int)vRes.y / (int)TILE_SIZE)+1;
+
+	for (int iCurRow = iLeftTopTileRow; iCurRow < (iLeftTopTileRow + iNumTilesInViewY); ++iCurRow)
+	{
+		for (int iCurCol = iLeftTopTileCol; iCurCol < (iLeftTopTileCol + iNumTilesInViewX); ++iCurCol)
+		{
+			if (iCurCol < 0 || m_iXTileCount <= iCurCol || iCurRow < 0 || m_iYTileCount <= iCurRow)
+			{
+				continue;
+			}
+			int iIdx = (m_iXTileCount * iCurRow) + iCurCol;
+			vecTile[iIdx]->Render(_hdc);
+		}
+	}
+	
 }
 
 

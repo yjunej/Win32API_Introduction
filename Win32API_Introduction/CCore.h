@@ -1,5 +1,6 @@
 #pragma once
 
+class CTexture;
 
 class CCore
 {
@@ -10,13 +11,10 @@ private:
 	POINT m_ptResolution; // main window resolution
 	HDC m_hDC; // main window device context
 
-	HBITMAP m_hBmap;
-	HDC m_hSubDC;
-
 	HBRUSH m_arrBrush[(UINT)BRUSH_TYPE::END];
 	HPEN m_arrPen[(UINT)PEN_TYPE::END];
 
-
+	CTexture* m_pMemTex; // Back Buffer
 
 public:
 	int Init(HWND m_hWnd, POINT m_ptResolution);

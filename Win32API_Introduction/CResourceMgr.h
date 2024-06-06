@@ -14,5 +14,6 @@ private:
 public:
 	CTexture* LoadTexture(const wstring& _strKey, const wstring& _strRelPath);
 	CTexture* FindTexture(const wstring& _strKey);
+	CTexture* CreateTexture(const wstring& _strKey, UINT _iWidth, UINT _iHeight);
 };
 

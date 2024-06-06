@@ -40,7 +40,7 @@ void CScene_Tool::Update()
 void CScene_Tool::Enter()
 {
 	// Create Initial Tiles
-	CreateTile(4, 4);
+	CreateTile(100, 100);
 
 	// Create UI
 	Vec2 vResolution = CCore::GetInstance()->GetResolution();

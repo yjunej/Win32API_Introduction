@@ -31,3 +31,15 @@ void CTexture::Load(const wstring& _strPath)
 	GetObject(m_hBitmap, sizeof(BITMAP), &m_bitmap);
 }
 
+void CTexture::Create(UINT _iWidth, UINT _iHeight)
+{
+	HDC hdcMain = CCore::GetInstance()->GetMainDC();
+	m_hBitmap = CreateCompatibleBitmap(hdcMain, _iWidth, _iHeight);
+	m_hdc = CreateCompatibleDC(hdcMain);
+
+	HBITMAP hPrevBitmap = (HBITMAP)SelectObject(m_hdc, m_hBitmap);
+	DeleteObject(hPrevBitmap);
+
+	GetObject(m_hBitmap, sizeof(BITMAP), &m_bitmap);
+}
+

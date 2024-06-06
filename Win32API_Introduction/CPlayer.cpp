@@ -88,9 +88,6 @@ void CPlayer::Render(HDC _hdc)
 		0, 0, SRCCOPY
 	);	*/
 
-    
-
-    //SaveHBITMAPToFile(CreateCompatibleBitmap(_hdc, CCore::GetInstance()->GetResolution().x, CCore::GetInstance()->GetResolution().y), L"t.bmp");
 
 	//TransparentBlt(_hdc,
 	//	int(vPos.x - (float)(iWidth / 2)),
@@ -102,6 +99,34 @@ void CPlayer::Render(HDC _hdc)
 	//);
 
     RenderComponent(_hdc);
+
+	// AlphaBlend
+	/*CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"texture\\RedHoodAttack.bmp");
+
+	Vec2 vPos = GetPos();
+	vPos = CCamera::GetInstance()->ScreenPosToRenderPos(vPos);
+
+	float width = (float)pTex->GetWidth();
+	float height = (float)pTex->GetHeight();
+
+	BLENDFUNCTION bf = {};
+
+	bf.BlendOp = AC_SRC_OVER;
+	bf.BlendFlags = 0;
+	bf.AlphaFormat = AC_SRC_ALPHA;
+	bf.SourceConstantAlpha = 255;
+
+	AlphaBlend(
+		_hdc,
+		vPos.x - width / 2.f,
+		vPos.y - height / 2.f,
+		width,
+		height,
+		pTex->GetDC(),
+		0, 0, width, height, bf
+	);*/
+
+
 }
 
 void CPlayer::Fire()

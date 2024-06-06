@@ -10,24 +10,24 @@
 #include "CEventMgr.h"
 #include "CCamera.h"
 #include "CUIMgr.h"
+#include "CResourceMgr.h"
+
+#include "CTexture.h"
 
 CCore::CCore()
 	: m_hWnd(0)
 	, m_ptResolution{}	
 	, m_hDC(0)
-	, m_hBmap(0)
-	, m_hSubDC(0)
 	, m_arrBrush{}
 	, m_arrPen{}
+	, m_pMemTex(nullptr)
 {
 }
 
 CCore::~CCore()
 {
 	ReleaseDC(m_hWnd, m_hDC);
-	
-	DeleteDC(m_hSubDC);
-	DeleteObject(m_hBmap);
+
 
 	for (int i = 0; i < (UINT)PEN_TYPE::END; ++i)
 	{
@@ -48,12 +48,17 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	m_hDC = GetDC(m_hWnd);
 
 	// Double Buffering
-	m_hBmap = CreateCompatibleBitmap(m_hDC, m_ptResolution.x, m_ptResolution.y);
+	m_pMemTex = CResourceMgr::GetInstance()->CreateTexture(L"BackBuffer",(UINT)m_ptResolution.x, (UINT)m_ptResolution.y);
+
+
+	/*m_hBmap = CreateCompatibleBitmap(m_hDC, m_ptResolution.x, m_ptResolution.y);
 	m_hSubDC = CreateCompatibleDC(m_hDC);
 
-	HBITMAP hPrevBmap = (HBITMAP)SelectObject(m_hSubDC, m_hBmap);
+	HBITMAP hPrevBmap = (HBITMAP)SelectObject(m_hSubDC, m_hBmap);*/
+
+
 	// 1pixel dummy initial bitmap 
-	DeleteObject(hPrevBmap); 
+	//DeleteObject(hPrevBmap); 
 
 
 	// Initialize Brush & Pen Tools
@@ -64,6 +69,7 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	CPathMgr::GetInstance()->Init();
 	CTimeMgr::GetInstance()->Init();
 	CKeyMgr::GetInstance()->Init();
+	CCamera::GetInstance()->Init();
 	CSceneMgr::GetInstance()->Init();
 
 	return S_OK;
@@ -86,10 +92,11 @@ void CCore::Progress()
 	// ===============
 	// || Rendering ||
 	// =============== 
-	Rectangle(m_hSubDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
-	CSceneMgr::GetInstance()->Render(m_hSubDC);
+	Rectangle(m_pMemTex->GetDC(), -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
+	CSceneMgr::GetInstance()->Render(m_pMemTex->GetDC());
+	CCamera::GetInstance()->Render(m_pMemTex->GetDC());
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
-		m_hSubDC, 0, 0, SRCCOPY);
+		m_pMemTex->GetDC(), 0, 0, SRCCOPY);
 
 
 	// ==========================

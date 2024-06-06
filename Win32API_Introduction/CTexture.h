@@ -13,11 +13,12 @@ private:
 
 public:
 	void Load(const wstring& _strPath);
+	void Create(UINT _iWidth, UINT _iHeight);
 
-	UINT GetWidth() { return (UINT)m_bitmap.bmWidth; }
-	UINT GetHeight() { return (UINT)m_bitmap.bmHeight; }
+	UINT GetWidth() const { return (UINT)m_bitmap.bmWidth; }
+	UINT GetHeight() const { return (UINT)m_bitmap.bmHeight; }
 
-	HDC GetDC() { return m_hdc; }
+	HDC GetDC() const { return m_hdc; }
 
 private:
 	CTexture();

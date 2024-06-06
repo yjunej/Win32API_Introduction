@@ -44,3 +44,21 @@ CTexture* CResourceMgr::FindTexture(const wstring& _strKey)
     }
     return (CTexture*)iter->second;
 }
+
+CTexture* CResourceMgr::CreateTexture(const wstring& _strKey, UINT _iWidth, UINT _iHeight)
+{
+    CTexture* pTexture = FindTexture(_strKey);
+    if (nullptr != pTexture)
+    {
+        return pTexture;
+    }
+
+    pTexture = new CTexture;
+
+    pTexture->Create(_iWidth, _iHeight);
+    pTexture->SetKey(_strKey);
+
+    m_mapTex.insert(make_pair(_strKey, pTexture));
+
+    return pTexture;
+}
