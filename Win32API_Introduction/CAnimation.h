@@ -30,6 +30,8 @@ public:
 	void Render(HDC _hdc);
 
 	void Create(CTexture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, float _fDuration, UINT _iFrameCount);
+	void Save(const wstring& _strRelPath);
+	void Load(const wstring& _strRelPath);
 
 	bool IsFinish() const { return m_bFinish; }
 	const wstring& GetName() const { return m_strName; }

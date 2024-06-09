@@ -39,6 +39,15 @@ CAnimation* CAnimator::FindAnimation(const wstring& _strName)
 	return iter->second;
 }
 
+void CAnimator::LoadAnimation(const wstring& _strRelPath)
+{
+	CAnimation* pAnim = new CAnimation;
+	pAnim->Load(_strRelPath);
+	pAnim->m_pAnimator = this;
+	m_mapAnim.insert(make_pair(pAnim->GetName(), pAnim));
+
+}
+
 void CAnimator::Play(const wstring& _strName, bool bLoop)
 {
 	m_pCurAnim = FindAnimation(_strName);

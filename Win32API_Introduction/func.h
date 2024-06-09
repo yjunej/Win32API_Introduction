@@ -34,3 +34,7 @@ void DeleteMapSafe(map<T, U>& _map)
 	}
 	_map.clear();
 }
+
+void SaveWString(const wstring& _str, FILE* _pFile);
+void LoadWString(wstring& _str, FILE* _pFile);
+void FScanf(char* _pOut, FILE* _pFile);

@@ -1,4 +1,10 @@
 
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CEnemySpawner.cpp"
+
+
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CGround.cpp"
+
+
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CIdleState.cpp"
 
 
@@ -21,16 +27,4 @@
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CResourceMgr.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CRigidBody.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CScene.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CSceneMgr.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CScene_Start.cpp"
 

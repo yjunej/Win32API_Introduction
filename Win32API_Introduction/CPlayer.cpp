@@ -33,18 +33,27 @@ CPlayer::CPlayer()
     GetCollider()->SetScale(Vec2(30.f, 40.f));
 
 	// Load Texture
-	//CTexture* pTex = CResourceMgr::GetInstance()->LoadTexture(L"PlayerTexture", L"\\texture\\galaga.bmp");
-	CTexture* pTexAttackRight = CResourceMgr::GetInstance()->LoadTexture(L"ATTACK_RIGHT", L"texture\\RedHoodAttack.bmp");
+	/*CTexture* pTexAttackRight = CResourceMgr::GetInstance()->LoadTexture(L"ATTACK_RIGHT", L"texture\\RedHoodAttack.bmp");
 	CTexture* pTexIdleLeft = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_LEFT", L"texture\\RedHoodIdleLeft.bmp");
-	CTexture* pTexIdleRight = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_RIGHT", L"texture\\RedHoodIdleRight.bmp");
-
-
+	CTexture* pTexIdleRight = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_RIGHT", L"texture\\RedHoodIdleRight.bmp");*/
 
 
 	CreateAnimator();
-	GetAnimator()->CreateAnimation(L"ATTACK_RIGHT_ANIM", pTexAttackRight, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 26);
+
+	// Load Animation
+	GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleLeft.anim");
+	GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleRight.anim");
+	GetAnimator()->LoadAnimation(L"animation\\RedHoodAttackRight.anim");
+
+	/*GetAnimator()->CreateAnimation(L"ATTACK_RIGHT_ANIM", pTexAttackRight, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 26);
 	GetAnimator()->CreateAnimation(L"IDLE_LEFT_ANIM", pTexIdleLeft, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 18);
 	GetAnimator()->CreateAnimation(L"IDLE_RIGHT_ANIM", pTexIdleRight, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 18);
+
+	GetAnimator()->FindAnimation(L"IDLE_LEFT_ANIM")->Save(L"animation\\RedHoodIdleLeft.anim");
+	GetAnimator()->FindAnimation(L"IDLE_RIGHT_ANIM")->Save(L"animation\\RedHoodIdleRight.anim");
+	GetAnimator()->FindAnimation(L"ATTACK_RIGHT_ANIM")->Save(L"animation\\RedHoodAttackRight.anim");
+*/
+
 
 	GetAnimator()->Play(L"IDLE_LEFT_ANIM", true);
 

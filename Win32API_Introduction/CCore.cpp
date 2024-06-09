@@ -11,7 +11,9 @@
 #include "CCamera.h"
 #include "CUIMgr.h"
 #include "CResourceMgr.h"
+#include "CSoundMgr.h"
 
+#include "CSound.h"
 #include "CTexture.h"
 #include "SelectGDI.h"
 #include "resource.h"
@@ -76,7 +78,15 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	CTimeMgr::GetInstance()->Init();
 	CKeyMgr::GetInstance()->Init();
 	CCamera::GetInstance()->Init();
+	//CSoundMgr::GetInstance()->Init();
 	CSceneMgr::GetInstance()->Init();
+
+	// TEMP - TEST SOUND
+	//CResourceMgr::GetInstance()->LoadSound(L"TestSound", L"sound\\test.wav");
+	//CSound* pSound = CResourceMgr::GetInstance()->FindSound(L"TestSound");
+	
+	//pSound->Play();
+	//CSoundMgr::GetInstance()->RegisterToBGM(pSound);
 
 	return S_OK;
 }

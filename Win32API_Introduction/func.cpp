@@ -39,3 +39,42 @@ void ChangeAIState(AI* _pAI, ENEMY_STATE _eNewState)
 	CEventMgr::GetInstance()->AddEvent(tevn); 
 
 }
+
+void SaveWString(const wstring& _str, FILE* _pFile)
+{
+	// wstring - vector base STL, Need to proceed Serialization
+	const wchar_t* pStrName = _str.c_str();
+	size_t iLen = _str.length();
+
+	// save length
+	fwrite(&iLen, sizeof(size_t), 1, _pFile);
+	fwrite(pStrName, sizeof(wchar_t), iLen, _pFile);
+}
+
+void LoadWString(wstring& _str, FILE* _pFile)
+{
+	// Read Custom Format
+	size_t iLen = 0;
+	fread(&iLen, sizeof(size_t), 1, _pFile);
+
+	wchar_t szBuff[256] = {};
+	fread(szBuff, sizeof(wchar_t), iLen, _pFile);
+
+	_str = szBuff;
+}
+
+void FScanf(char* _pOut, FILE* _pFile)
+{
+	int i = 0;
+	while (true)
+	{
+		char c = (char)getc(_pFile);
+		if (c == '\n')
+		{
+			_pOut[i++] = '\0';
+			break;
+
+		}
+		_pOut[i++] = c;
+	}
+}
