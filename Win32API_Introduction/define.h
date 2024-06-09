@@ -35,11 +35,12 @@
 enum class GROUP_TYPE
 {
 	DEFAULT,
+	TILE,
+	GROUND,
 	PLAYER,
 	ENEMY,
 	PROJ_PLAYER,
 	PROJ_ENEMY,
-	TILE,
 
 	UI = 31,
 	END = 32,

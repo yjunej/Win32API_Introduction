@@ -146,8 +146,8 @@ bool CCollisionMgr::IsCollide(CCollider* _pLeftColl, CCollider* _pRightColl)
 	Vec2 vRightPos = _pRightColl->GetCollPos();
 	Vec2 vRightScale = _pRightColl->GetScale();
 
-	if (abs(vRightPos.x - vLeftPos.x) < (vLeftScale.x + vRightScale.x) / 2.f &&
-		abs(vRightPos.y - vLeftPos.y) < (vLeftScale.y + vRightScale.y) / 2.f)
+	if (abs(vRightPos.x - vLeftPos.x) <= (vLeftScale.x + vRightScale.x) / 2.f &&
+		abs(vRightPos.y - vLeftPos.y) <= (vLeftScale.y + vRightScale.y) / 2.f)
 	{
 		return true;
 	}

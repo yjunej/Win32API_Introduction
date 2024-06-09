@@ -113,6 +113,15 @@
     <Filter Include="Engine\09. Factory\EnemySpawner">
       <UniqueIdentifier>{da468e1e-a9d3-4192-87fe-518a6b108994}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\07. Component\RigidBody">
+      <UniqueIdentifier>{2dc07591-d9cd-4935-82aa-66b9588f40fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07. Component\Gravity">
+      <UniqueIdentifier>{49df1c2b-5cda-40af-b458-ebefeaf034d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Ground">
+      <UniqueIdentifier>{9aa24413-1f4d-413b-bcd2-63c607f5f900}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32API_Introduction.h">
@@ -236,6 +245,15 @@
     <ClInclude Include="CEnemySpawner.h">
       <Filter>Engine\09. Factory\EnemySpawner</Filter>
     </ClInclude>
+    <ClInclude Include="CRigidBody.h">
+      <Filter>Engine\07. Component\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="CGravity.h">
+      <Filter>Engine\07. Component\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="CGround.h">
+      <Filter>Engine\04. Object\Ground</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -337,6 +355,15 @@
     </ClCompile>
     <ClCompile Include="CEnemySpawner.cpp">
       <Filter>Engine\09. Factory\EnemySpawner</Filter>
+    </ClCompile>
+    <ClCompile Include="CRigidBody.cpp">
+      <Filter>Engine\07. Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="CGravity.cpp">
+      <Filter>Engine\07. Component\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="CGround.cpp">
+      <Filter>Engine\04. Object\Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@
 
 #include "CIdleState.h"
 #include "CTraceState.h"
+#include "CRigidBody.h"
 
 CEnemySpawner::CEnemySpawner()
 {
@@ -34,7 +35,8 @@ CEnemy* CEnemySpawner::SpawnEnemy(ENEMY_TYPE _eType, Vec2 _vPos)
 		info.fSpeed = 150.f;
 
 		pEnemy->SetEnemyInfo(info);
-
+		pEnemy->CreateRigidBody();
+		pEnemy->GetRigidBody()->SetMass(1.f);
 
 		AI* pAI = new AI;
 		pAI->AddState(new CIdleState);

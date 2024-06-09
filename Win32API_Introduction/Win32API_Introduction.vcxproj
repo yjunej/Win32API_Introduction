@@ -150,6 +150,7 @@
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CEnemySpawner.h" />
+    <ClInclude Include="CGround.h" />
     <ClInclude Include="CIdleState.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CObject.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CResource.h" />
     <ClInclude Include="CResourceMgr.h" />
+    <ClInclude Include="CRigidBody.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CScene_Start.h" />
@@ -174,6 +176,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="CGravity.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectGDI.h" />
@@ -193,6 +196,7 @@
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CEnemySpawner.cpp" />
+    <ClCompile Include="CGround.cpp" />
     <ClCompile Include="CIdleState.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CObject.cpp" />
@@ -201,6 +205,7 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CResource.cpp" />
     <ClCompile Include="CResourceMgr.cpp" />
+    <ClCompile Include="CRigidBody.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScene_Start.cpp" />
@@ -214,6 +219,7 @@
     <ClCompile Include="CUI.cpp" />
     <ClCompile Include="CUIMgr.cpp" />
     <ClCompile Include="func.cpp" />
+    <ClCompile Include="CGravity.cpp" />
     <ClCompile Include="SelectGDI.cpp" />
     <ClCompile Include="Win32API_Introduction.cpp" />
   </ItemGroup>

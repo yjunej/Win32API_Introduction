@@ -16,6 +16,7 @@ private:
 	UINT m_iID;
 	int m_iColl;
 
+	bool m_bActive;
 
 public:
 	void SetOffsetPos(Vec2 _v) { m_vOffsetPos = _v; }

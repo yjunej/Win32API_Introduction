@@ -5,6 +5,8 @@
 
 class CCollider;
 class CAnimator;
+class CRigidBody;
+class CGravity;
 
 class CObject
 {
@@ -15,12 +17,16 @@ private:
 	Vec2 m_vPos;
 	Vec2 m_vScale;
 
+	// Component
 	CCollider* m_pCollider;
 	CAnimator* m_pAnimator;
+	CRigidBody* m_pRigidBody;
+	CGravity* m_pGravity;
 
 	bool m_bAlive;
 
 public:
+	virtual void BeginPlay() {};
 	virtual void Update() = 0;
 	virtual void PostUpdate();
 	virtual void Render(HDC _hdc);
@@ -29,6 +35,9 @@ public:
 
 	void CreateCollider();
 	void CreateAnimator();
+	void CreateRigidBody();
+	void CreateGravity();
+
 	void RenderComponent(HDC _hdc);
 	bool IsDead() const { return !m_bAlive; }
 
@@ -41,6 +50,8 @@ public:
 	Vec2 GetScale() const { return m_vScale; }
 	CCollider* GetCollider() const { return m_pCollider; }
 	CAnimator* GetAnimator() const { return m_pAnimator; }
+	CRigidBody* GetRigidBody() const { return m_pRigidBody; }
+	CGravity* GetGravity() const { return m_pGravity; }
 	const wstring& GetName() const { return m_strName; }
 
 	void SetPos(Vec2 _vPos) { m_vPos = _vPos; }

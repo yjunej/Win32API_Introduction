@@ -50,6 +50,9 @@ void CEnemy::OnCollisionEnd(CCollider* _pOther)
 
 void CEnemy::Update()
 {
-	m_pAI->Update();
+	if (nullptr != m_pAI)
+	{
+		m_pAI->Update();
+	}
 }
 

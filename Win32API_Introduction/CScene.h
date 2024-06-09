@@ -30,10 +30,10 @@ public:
 
 	CObject* GetPlayer() const { return m_pPlayer; }
 
-
+	virtual void BeginPlay();
 	virtual void Update();
 	void PostUpdate();
-	void Render(HDC _hdc);
+	virtual void Render(HDC _hdc);
 	void RenderTile(HDC _hdc);
 
 
