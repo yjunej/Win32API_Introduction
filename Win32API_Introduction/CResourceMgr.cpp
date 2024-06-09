@@ -3,6 +3,7 @@
 
 #include "CPathMgr.h"
 #include "CTexture.h"
+#include "CSound.h"
 
 CResourceMgr::CResourceMgr()
 {
@@ -61,4 +62,38 @@ CTexture* CResourceMgr::CreateTexture(const wstring& _strKey, UINT _iWidth, UINT
     m_mapTex.insert(make_pair(_strKey, pTexture));
 
     return pTexture;
+}
+
+CSound* CResourceMgr::LoadSound(const wstring& _strKey, const wstring& _strRelPath)
+{
+	CSound* pSound = FindSound(_strKey);
+	if (nullptr != pSound)
+	{
+		return pSound;
+	}
+
+	wstring strPath = CPathMgr::GetInstance()->GetContentPath();
+	strPath += _strRelPath;
+
+	pSound = new CSound;
+
+	pSound->Load(strPath);
+	pSound->SetKey(_strKey);
+	pSound->SetRelPath(_strRelPath);
+
+	m_mapTex.insert(make_pair(_strKey, pSound));
+
+	return pSound;
+
+
+}
+
+CSound* CResourceMgr::FindSound(const wstring& _strKey)
+{
+	map<wstring, CResource*>::iterator iter = m_mapTex.find(_strKey);
+	if (iter == m_mapTex.end())
+	{
+		return nullptr;
+	}
+	return (CSound*)iter->second;
 }
