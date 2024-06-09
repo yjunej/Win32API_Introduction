@@ -5,6 +5,7 @@
 #include "CSceneMgr.h"
 #include "CScene.h"
 #include "CUIMgr.h"
+#include "AI.h"
 
 CEventMgr::CEventMgr()
 {
@@ -60,6 +61,17 @@ void CEventMgr::Execute(const tEvent& _event)
 		// lParam: New Scene Addr
 		CSceneMgr::GetInstance()->ChangeScene((SCENE_TYPE)_event.lParam);
 		CUIMgr::GetInstance()->SetFocusedUI(nullptr);
+		break;
+	}
+	case EVENT_TYPE::CHANGE_AI_STATE:
+	{
+		// lParam: pAI
+		// rParam: ENEMY_STATE eNewState
+		AI * pAI = (AI*)_event.lParam;
+		ENEMY_STATE eNewState = (ENEMY_STATE)_event.wParam;
+
+		pAI->ChangeState(eNewState);
+
 		break;
 	}
 	default:

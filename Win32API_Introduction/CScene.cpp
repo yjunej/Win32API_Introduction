@@ -11,7 +11,8 @@
 
 CScene::CScene()
 	:m_iXTileCount(0)
-	,m_iYTileCount(0)
+	, m_iYTileCount(0)
+	, m_pPlayer(nullptr)
 {
 }
 
@@ -102,7 +103,7 @@ void CScene::RenderTile(HDC _hdc)
 	{
 		for (int iCurCol = iLeftTopTileCol; iCurCol < (iLeftTopTileCol + iNumTilesInViewX); ++iCurCol)
 		{
-			if (iCurCol < 0 || m_iXTileCount <= iCurCol || iCurRow < 0 || m_iYTileCount <= iCurRow)
+			if (iCurCol < 0 || m_iXTileCount <= (UINT)iCurCol || iCurRow < 0 || m_iYTileCount <=(UINT) iCurRow)
 			{
 				continue;
 			}

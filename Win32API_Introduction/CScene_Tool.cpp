@@ -39,8 +39,11 @@ void CScene_Tool::Update()
 
 void CScene_Tool::Enter()
 {
+	// Attack Menu bar
+	CCore::GetInstance()->AttachMenubar();
+
 	// Create Initial Tiles
-	CreateTile(100, 100);
+	CreateTile(5, 5);
 
 	// Create UI
 	Vec2 vResolution = CCore::GetInstance()->GetResolution();
@@ -74,6 +77,7 @@ void CScene_Tool::Enter()
 
 void CScene_Tool::Exit()
 {
+	CCore::GetInstance()->DetachMenubar();
 	DeleteAll();
 }
 

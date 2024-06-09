@@ -1,4 +1,7 @@
 
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\AI.cpp"
+
+
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CAnimation.cpp"
 
 
@@ -26,5 +29,5 @@
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CEnemy.cpp"
 
 
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CKeyMgr.cpp"
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CEnemySpawner.cpp"
 

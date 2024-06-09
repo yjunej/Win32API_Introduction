@@ -1,6 +1,8 @@
 #pragma once
 
 #include "global.h"
+#include "CEnemySpawner.h"
+
 
 class CObject;
 
@@ -14,6 +16,11 @@ private:
 	UINT			 m_iXTileCount; // Num of Tiles
 	UINT			 m_iYTileCount;
 
+	CObject*		 m_pPlayer;
+
+
+	
+
 public:
 	void SetName(const wstring& _strName) { m_strName =		_strName; }
 	const wstring& GetName() { return m_strName; }
@@ -21,6 +28,7 @@ public:
 	UINT GetXTileCount() const { return m_iXTileCount; }
 	UINT GetYTileCount() const { return m_iYTileCount; }
 
+	CObject* GetPlayer() const { return m_pPlayer; }
 
 
 	virtual void Update();
@@ -34,8 +42,12 @@ public:
 
 public:
 	void AddObject(CObject* _pObj, GROUP_TYPE _eType);
+	void RegisterPlayer(CObject* _pObj) { m_pPlayer = _pObj; }
+
+
 	const vector<CObject*>& GetGroupObject(GROUP_TYPE _eType) const { return m_arrObj[(UINT)_eType]; }
 	vector<CObject*>& GetUIGroupObject() { return m_arrObj[(UINT)GROUP_TYPE::UI]; }
+
 
 
 	void DeleteGroup(GROUP_TYPE _eType);

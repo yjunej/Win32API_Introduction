@@ -4,7 +4,7 @@ class CTexture;
 
 class CCore
 {
-	SINGLE(CCore);
+	SINGLE(CCore)
 
 private:
 	HWND m_hWnd; // main window handle
@@ -16,11 +16,16 @@ private:
 
 	CTexture* m_pMemTex; // Back Buffer
 
+	HMENU m_hMenu;
+
 public:
 	int Init(HWND m_hWnd, POINT m_ptResolution);
 	void Progress();
-
+	void ClearScreen();
 	void CreatePaintTools();
+	void AttachMenubar();
+	void DetachMenubar();
+	void ChangeWindowSize(Vec2 _vResolution, bool _bMenu);
 
 public:
 	HWND GetMainHwnd() const { return m_hWnd; }
@@ -28,7 +33,7 @@ public:
 	HDC GetMainDC() const { return m_hDC; }
 	HBRUSH GetBrush(BRUSH_TYPE _eType) const { return m_arrBrush[(UINT)_eType]; }
 	HPEN GetPen(PEN_TYPE _eType) const { return m_arrPen[(UINT)_eType]; }
-
+	HMENU GetMenu() const { return m_hMenu; }
 };
 
 

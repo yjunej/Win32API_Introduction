@@ -9,6 +9,9 @@
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
 #include "CCamera.h"
+#include "AI.h"
+#include "CIdleState.h"
+#include "CTraceState.h"
 
 CScene_Start::CScene_Start()
 {
@@ -46,6 +49,8 @@ void CScene_Start::Enter()
 	pObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
+	RegisterPlayer(pObj);
+
 	// Copy Player Example
 
 	//CObject* pOtherPlayer = pObj->Clone();
@@ -55,27 +60,15 @@ void CScene_Start::Enter()
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 	// Camera Follow Player
+
 	//CCamera::GetInstance()->SetFocus(pObj);
 
-	int iNumEnemy = 2;
-	float fMoveDist = 25.f;
-	float fObjScale = 50.f;
 
+	// Spawn Enemy
 	Vec2 vResolution = CCore::GetInstance()->GetResolution();
-	float fInterval = (vResolution.x - ((fMoveDist + fObjScale / 2.f) * 2)) / (float)(iNumEnemy-1);
+	CEnemy* pEnemy = CEnemySpawner::SpawnEnemy(ENEMY_TYPE::NORMAL, vResolution / 2.f - Vec2(0.f, 300.f));
+	AddObject(pEnemy, GROUP_TYPE::ENEMY);
 
-	CEnemy* pEnemy = nullptr;
-
-	for (int i = 0; i < iNumEnemy; ++i)
-	{
-		pEnemy = new CEnemy;
-		pEnemy->SetName(L"Enemy");
-		pEnemy->SetPos(Vec2((fMoveDist + fObjScale / 2.f) + (float)i * fInterval, 50.f));
-		pEnemy->SetCenterPos(pEnemy->GetPos()); 
-		pEnemy->SetPatrolDistance(fMoveDist);
-		pEnemy->SetScale(Vec2(fObjScale, fObjScale));
-		AddObject(pEnemy, GROUP_TYPE::ENEMY);
-	}
 
 	// LoadTile
 	//LoadTile(L"Tile\\Start.tile");

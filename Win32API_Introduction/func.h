@@ -1,10 +1,12 @@
 #pragma once
 
 class CObject;
+class AI;
 
 void CreateObject(CObject* _pObj, GROUP_TYPE _eGroup);
 void DeleteObject(CObject* _pObj);
 void ChangeScene(SCENE_TYPE _eScene);
+void ChangeAIState(AI* _pAI, ENEMY_STATE _eNewState);
 
 template<typename T>
 void DeleteVectorSafe(vector<T>& _vec)

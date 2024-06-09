@@ -1,4 +1,10 @@
 
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CIdleState.cpp"
+
+
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CKeyMgr.cpp"
+
+
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CObject.cpp"
 
 
@@ -24,7 +30,4 @@
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CScene_Start.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CScene_Tool.cpp"
 

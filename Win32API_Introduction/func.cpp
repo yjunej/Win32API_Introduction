@@ -28,3 +28,14 @@ void ChangeScene(SCENE_TYPE _eScene)
 	tEventInfo.lParam = (DWORD_PTR)_eScene;
 	CEventMgr::GetInstance()->AddEvent(tEventInfo);
 }
+
+void ChangeAIState(AI* _pAI, ENEMY_STATE _eNewState)
+{
+	tEvent tevn = {};
+	tevn.eEvent = EVENT_TYPE::CHANGE_AI_STATE;
+	tevn.lParam = (DWORD_PTR)_pAI;
+	tevn.wParam = (DWORD_PTR)_eNewState;
+
+	CEventMgr::GetInstance()->AddEvent(tevn); 
+
+}

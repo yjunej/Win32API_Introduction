@@ -101,6 +101,18 @@
     <Filter Include="Engine\04. Object\UI\ButtonUI">
       <UniqueIdentifier>{3e429429-1e56-4a08-998f-3ee90d4ca92e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\08. Module\AI">
+      <UniqueIdentifier>{0486b4fa-c9c6-455e-ae1a-fb9bfd2830ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State">
+      <UniqueIdentifier>{6f51c271-fc19-4d9d-9f57-7e1bb0abe208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\09. Factory">
+      <UniqueIdentifier>{bdd2b4d6-0711-416e-9838-b9e381aa55cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\09. Factory\EnemySpawner">
+      <UniqueIdentifier>{da468e1e-a9d3-4192-87fe-518a6b108994}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32API_Introduction.h">
@@ -209,6 +221,21 @@
     <ClInclude Include="CButtonUI.h">
       <Filter>Engine\04. Object\UI\ButtonUI</Filter>
     </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Engine\08. Module\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClInclude>
+    <ClInclude Include="CIdleState.h">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClInclude>
+    <ClInclude Include="CTraceState.h">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemySpawner.h">
+      <Filter>Engine\09. Factory\EnemySpawner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -295,6 +322,21 @@
     </ClCompile>
     <ClCompile Include="CButtonUI.cpp">
       <Filter>Engine\04. Object\UI\ButtonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Engine\08. Module\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CIdleState.cpp">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CTraceState.cpp">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemySpawner.cpp">
+      <Filter>Engine\09. Factory\EnemySpawner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
