@@ -51,7 +51,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Initialize Core Instance
 
    
-    if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 1280, 720 })))
+    //if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 1024, 576 })))
+	if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 2048, 1152 })))
     {
         MessageBox(nullptr, L"Failed to Initialize Core Class", L"ERROR", MB_OK);
         return FALSE;

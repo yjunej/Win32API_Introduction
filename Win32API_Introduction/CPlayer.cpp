@@ -33,26 +33,25 @@ CPlayer::CPlayer()
     GetCollider()->SetScale(Vec2(30.f, 40.f));
 
 	// Load Texture
-	/*CTexture* pTexAttackRight = CResourceMgr::GetInstance()->LoadTexture(L"ATTACK_RIGHT", L"texture\\RedHoodAttack.bmp");
+	CTexture* pTexAttackRight = CResourceMgr::GetInstance()->LoadTexture(L"ATTACK_RIGHT", L"texture\\RedHoodAttack.bmp");
 	CTexture* pTexIdleLeft = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_LEFT", L"texture\\RedHoodIdleLeft.bmp");
-	CTexture* pTexIdleRight = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_RIGHT", L"texture\\RedHoodIdleRight.bmp");*/
+	CTexture* pTexIdleRight = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_RIGHT", L"texture\\RedHoodIdleRight.bmp");
 
 
 	CreateAnimator();
 
 	// Load Animation
-	GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleLeft.anim");
-	GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleRight.anim");
-	GetAnimator()->LoadAnimation(L"animation\\RedHoodAttackRight.anim");
+	//GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleLeft.anim");
+	//GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleRight.anim");
+	//GetAnimator()->LoadAnimation(L"animation\\RedHoodAttackRight.anim");
 
-	/*GetAnimator()->CreateAnimation(L"ATTACK_RIGHT_ANIM", pTexAttackRight, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 26);
+	GetAnimator()->CreateAnimation(L"ATTACK_RIGHT_ANIM", pTexAttackRight, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 26);
 	GetAnimator()->CreateAnimation(L"IDLE_LEFT_ANIM", pTexIdleLeft, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 18);
 	GetAnimator()->CreateAnimation(L"IDLE_RIGHT_ANIM", pTexIdleRight, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 18);
 
 	GetAnimator()->FindAnimation(L"IDLE_LEFT_ANIM")->Save(L"animation\\RedHoodIdleLeft.anim");
 	GetAnimator()->FindAnimation(L"IDLE_RIGHT_ANIM")->Save(L"animation\\RedHoodIdleRight.anim");
 	GetAnimator()->FindAnimation(L"ATTACK_RIGHT_ANIM")->Save(L"animation\\RedHoodAttackRight.anim");
-*/
 
 
 	GetAnimator()->Play(L"IDLE_LEFT_ANIM", true);
@@ -60,8 +59,8 @@ CPlayer::CPlayer()
 	//CAnimation* pAnim = GetAnimator()->FindAnimation(L"TEST");
 	//pAnim->GetFrame(0).vOffset = Vec2(0.f, -20.f);
 
-	CreateRigidBody();
-	CreateGravity();
+	//CreateRigidBody();
+	//CreateGravity();
 }
 
 CPlayer::~CPlayer()
@@ -202,7 +201,8 @@ void CPlayer::UpdateState()
 			m_eCurState = PLAYER_STATE::WALK;
 		}
 	}
-	if (0.f == GetRigidBody()->GetSpeed() && KEY_NONE(KEY::A) && KEY_NONE(KEY::D))
+	//if (0.f == GetRigidBody()->GetSpeed() && KEY_NONE(KEY::A) && KEY_NONE(KEY::D))
+	if(KEY_NONE(KEY::A) && KEY_NONE(KEY::D))
 	{
 		if (m_eCurState != PLAYER_STATE::DASH)
 		{
@@ -228,7 +228,7 @@ void CPlayer::UpdateState()
 				vDashVelocity = Vec2(m_iDirection, 0);
 			}
 			vDashVelocity.Normalize();
-			GetRigidBody()->AddVelocity(vDashVelocity * 1200);
+			//GetRigidBody()->AddVelocity(vDashVelocity * 1200);
 		}
 	}
 	
@@ -236,52 +236,53 @@ void CPlayer::UpdateState()
 
 void CPlayer::UpdateMove()
 {
-	CRigidBody* pRigidBody = GetRigidBody();
-
+	//CRigidBody* pRigidBody = GetRigidBody();
+	Vec2 vPos = GetPos();
 
 	if (KEY_HOLD(KEY::W))
 	{
-		//vPos.y -= 200.f * fDT;
-		pRigidBody->AddForce(Vec2(0.f, -200.f));
+		vPos.y -= 200.f * fDT;
+		//pRigidBody->AddForce(Vec2(0.f, -200.f));
 	}
 	if (KEY_HOLD(KEY::A))
 	{
-		//vPos.x -= 200.f * fDT;
-		pRigidBody->AddForce(Vec2(-200.f, 0.f));
+		vPos.x -= 200.f * fDT;
+		//pRigidBody->AddForce(Vec2(-200.f, 0.f));
 
 	}
 	if (KEY_HOLD(KEY::S))
 	{
-		//vPos.y += 200.f * fDT;
-		pRigidBody->AddForce(Vec2(0.f, 200.f));
+		vPos.y += 200.f * fDT;
+		//pRigidBody->AddForce(Vec2(0.f, 200.f));
 	}
 	if (KEY_HOLD(KEY::D))
 	{
-		//vPos.x += 200.f * fDT;
-		pRigidBody->AddForce(Vec2(200.f, 0.f));
+		vPos.x += 200.f * fDT;
+		//pRigidBody->AddForce(Vec2(200.f, 0.f));
 	}
+	SetPos(vPos);
 
-	if (KEY_TAP(KEY::W))
-	{
-		//vPos.y -= 200.f * fDT;
-		pRigidBody->AddVelocity(Vec2(0.f, -100.f));
-	}
-	if (KEY_TAP(KEY::A))
-	{
-		//vPos.x -= 200.f * fDT;
-		pRigidBody->AddVelocity(Vec2(-100.f, 0.f));
+	//if (KEY_TAP(KEY::W))
+	//{
+	//	//vPos.y -= 200.f * fDT;
+	//	//pRigidBody->AddVelocity(Vec2(0.f, -100.f));
+	//}
+	//if (KEY_TAP(KEY::A))
+	//{
+	//	//vPos.x -= 200.f * fDT;
+	//	pRigidBody->AddVelocity(Vec2(-100.f, 0.f));
 
-	}
-	if (KEY_TAP(KEY::S))
-	{
-		//vPos.y += 200.f * fDT;
-		pRigidBody->AddVelocity(Vec2(0.f, 100.f));
-	}
-	if (KEY_TAP(KEY::D))
-	{
-		//vPos.x += 200.f * fDT;
-		pRigidBody->AddVelocity(Vec2(100.f, 0.f));
-	}
+	//}
+	//if (KEY_TAP(KEY::S))
+	//{
+	//	//vPos.y += 200.f * fDT;
+	//	pRigidBody->AddVelocity(Vec2(0.f, 100.f));
+	//}
+	//if (KEY_TAP(KEY::D))
+	//{
+	//	//vPos.x += 200.f * fDT;
+	//	pRigidBody->AddVelocity(Vec2(100.f, 0.f));
+	//}
 }
 
 void CPlayer::UpdateAnimation()

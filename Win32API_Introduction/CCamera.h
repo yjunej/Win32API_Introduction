@@ -20,7 +20,8 @@ struct tCamEffectInfo
 
 class CCamera
 {
-	SINGLE(CCamera);
+	SINGLE(CCamera)
+
 private:
 	Vec2 m_vLookPos; // Target Position
 	Vec2 m_vCurLookPos; // Current Position

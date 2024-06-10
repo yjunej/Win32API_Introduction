@@ -13,7 +13,7 @@ union COLLIDER_ID
 
 class CCollisionMgr
 {
-	SINGLE(CCollisionMgr);
+	SINGLE(CCollisionMgr)
 
 private:
 	map<ULONGLONG, bool> m_mapCollInfo; // Previous Frame Collision Info

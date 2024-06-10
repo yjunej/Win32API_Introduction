@@ -105,6 +105,7 @@ void CAnimation::Save(const wstring& _strRelPath)
 	// Save Texture Key
 	fprintf(pFile, "[Texture Name]\n");
 	strName = string(m_pTex->GetKey().begin(), m_pTex->GetKey().end());
+
 	fprintf(pFile, strName.c_str());
 	fprintf(pFile, "\n");
 	//SaveWString(m_pTex->GetKey(), pFile);

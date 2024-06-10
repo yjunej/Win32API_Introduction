@@ -37,6 +37,7 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Update()
 {
+	LoadTile(L"tile\\1024_576.tile");
 
 	if (KEY_HOLD(KEY::LBTN))
 	{
@@ -92,10 +93,16 @@ void CScene_Start::Render(HDC _hdc)
 {
 	CScene::Render(_hdc);
 
+	// DEBUG - print player pos, at left top
+	Vec2 PlayerPos = GetPlayer()->GetPos(); // .x float, .y float
+	wchar_t szPlayerPos[256] = {};
+	swprintf_s(szPlayerPos, L"Player Pos : %.2f, %.2f", PlayerPos.x, PlayerPos.y);
+	TextOut(_hdc, 0, 0, szPlayerPos, (int)wcslen(szPlayerPos));
+	//
+
 	if (!m_bUseForce)
 	{
 		return;
-
 	}
 	SelectGDI _g1(_hdc, BRUSH_TYPE::HOLLOW);
 	SelectGDI _g2(_hdc, PEN_TYPE::GREEN);
@@ -122,11 +129,13 @@ void CScene_Start::Render(HDC _hdc)
 
 void CScene_Start::Enter()
 {
+	Vec2 vResolution = CCore::GetInstance()->GetResolution();
+	
 
 	// Add Object
 	CObject* pObj = new CPlayer;
 	pObj->SetName(L"Player");
-	pObj->SetPos(Vec2(640.f, 384.f));
+	pObj->SetPos(vResolution/2.f);
 	pObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
@@ -141,21 +150,19 @@ void CScene_Start::Enter()
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 	// Camera Follow Player
-
-	//CCamera::GetInstance()->SetFocus(pObj);
+	CCamera::GetInstance()->SetFocus(pObj);
 
 
 	// Spawn Enemy
-	Vec2 vResolution = CCore::GetInstance()->GetResolution();
-	CEnemy* pEnemy = CEnemySpawner::SpawnEnemy(ENEMY_TYPE::NORMAL, vResolution / 2.f - Vec2(0.f, 300.f));
+	CEnemy* pEnemy = CEnemySpawner::SpawnEnemy(ENEMY_TYPE::NORMAL, vResolution / 2.f - Vec2(0.f, 200.f));
 	AddObject(pEnemy, GROUP_TYPE::ENEMY);
 
 	// Create Ground
-	CObject* pGround = new CGround;
-	pGround->SetName(L"Ground");
-	pGround->SetPos(Vec2(640.f, 500.f));
-	pGround->SetScale(Vec2(200.f, 65.f));
-	AddObject(pGround, GROUP_TYPE::GROUND);
+	//CObject* pGround = new CGround;
+	//pGround->SetName(L"Ground");
+	//pGround->SetPos(Vec2(640.f, 500.f));
+	//pGround->SetScale(Vec2(200.f, 65.f));
+	//AddObject(pGround, GROUP_TYPE::GROUND);
 
 
 
