@@ -194,3 +194,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+
+# Ksana Soul Content Files
+!x64/Release/
+!x64/Release/Content/
