@@ -1,0 +1,224 @@
+[Animation Name]
+IDLE_LEFT_ANIM
+[Texture Name]
+IDLE_LEFT
+[Texture Path]
+texture\RedHoodIdleLeft.bmp
+[Frame Count]
+18
+[Frame Index]
+0
+[Left Top]
+0 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+1
+[Left Top]
+80 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+2
+[Left Top]
+160 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+3
+[Left Top]
+240 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+4
+[Left Top]
+320 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+5
+[Left Top]
+400 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+6
+[Left Top]
+480 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+7
+[Left Top]
+560 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+8
+[Left Top]
+640 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+9
+[Left Top]
+720 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+10
+[Left Top]
+800 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+11
+[Left Top]
+880 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+12
+[Left Top]
+960 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+13
+[Left Top]
+1040 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+14
+[Left Top]
+1120 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+15
+[Left Top]
+1200 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+16
+[Left Top]
+1280 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
+[Frame Index]
+17
+[Left Top]
+1360 0
+[Slice Size]
+80 80
+[Offset]
+0 0
+[Duration]
+0.050000
+
+
