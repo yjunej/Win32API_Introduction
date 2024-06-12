@@ -19,6 +19,7 @@
 #include "CAnimation.h"
 #include "CRigidBody.h"
 #include "CGravity.h"
+#include "CCamera.h"
 
 
 CPlayer::CPlayer()
@@ -26,6 +27,10 @@ CPlayer::CPlayer()
 	, m_ePrevState(PLAYER_STATE::WALK)
 	, m_iDirection(1)
 	, m_iPrevDirection(1)
+	, m_iAttackPower(10)
+	, m_fAttackSpeed(2.f)
+	, m_iHP(100)
+	, m_fAccTime(0.f)
 {
     
     CreateCollider();
@@ -77,10 +82,18 @@ void CPlayer::Update()
 	UpdateState();
 	UpdateAnimation();
 
-	if (KEY_TAP(KEY::SPACE))
+	/*if (KEY_TAP(KEY::SPACE))
 	{
 		Fire();
+	}*/
+
+	m_fAccTime += fDT;
+	if (m_fAccTime > 1.f / m_fAttackSpeed)
+	{
+		Fire();
+		m_fAccTime = 0;
 	}
+
 
 	//SetPos(vPos);
 	GetAnimator()->Update();
@@ -159,14 +172,17 @@ void CPlayer::OnCollisionBegin(CCollider* _pOtherColl)
 void CPlayer::Fire()
 {
 	Vec2 vPos = GetPos();
-	vPos.y -= GetScale().y / 2.f;
+	//vPos.y -= GetScale().y / 2.f;
 
 	// Create Object
 	CBullet* pBullet = new CBullet;
 	pBullet->SetName(L"PlayerBullet");
 	pBullet->SetPos(vPos);
 	pBullet->SetScale(Vec2(25.f, 25.f));
-	pBullet->SetDirection(Vec2(0.f, -1.f));
+	pBullet->SetDamage(m_iAttackPower);
+	pBullet->SetDirection(
+		CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS) - GetPos()
+	);
 
 	// Deprecated - Manage by EventMGr
 	//CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();

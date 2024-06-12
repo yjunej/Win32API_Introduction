@@ -29,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     // Check Memory Leak
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+    _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
     //_CrtSetBreakAlloc(275);
 
     UNREFERENCED_PARAMETER(hPrevInstance);
@@ -52,7 +52,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
    
     //if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 1024, 576 })))
-	if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 2048, 1152 })))
+    if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 1920, 1080 })))
+	//if (FAILED(CCore::GetInstance()->Init(g_hWnd, POINT{ 2048, 1152 })))
     {
         MessageBox(nullptr, L"Failed to Initialize Core Class", L"ERROR", MB_OK);
         return FALSE;

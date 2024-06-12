@@ -10,6 +10,7 @@ CBullet::CBullet()
 	: m_fSpeed(600.f)
 	, m_fTheta(PI / 2.f)
 	, m_vDirection(Vec2(1.f, 1.f))
+	, m_fDamage(0.f)
 {
 	m_vDirection.Normalize();
 	CreateCollider();

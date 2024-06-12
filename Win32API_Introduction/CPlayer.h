@@ -30,6 +30,13 @@ private:
 	PLAYER_STATE m_eCurState;
 	PLAYER_STATE m_ePrevState;
 
+	float m_fAccTime;
+
+	// Stat
+	int m_iAttackPower = 0;
+	float m_fAttackSpeed = 0; // Attack per sec
+	int m_iHP = 0;
+
 public:
 	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;
@@ -38,6 +45,8 @@ public:
 
 	PLAYER_STATE GetCurState() const { return m_eCurState; }
 	void SetCurState(PLAYER_STATE val) { m_eCurState = val; }
+
+
 
 	// Covariant return type
 	virtual CLONE(CPlayer)

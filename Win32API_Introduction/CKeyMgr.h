@@ -60,7 +60,7 @@ struct tKeyInfo
 
 class CKeyMgr
 {
-	SINGLE(CKeyMgr);
+	SINGLE(CKeyMgr)
 
 private:
 	vector<tKeyInfo> m_vecKey;

@@ -49,6 +49,7 @@ void CScene_Start::Update()
 		m_bUseForce = false;
 	}
 
+
 	// CScene::Update();
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
 	{
@@ -98,6 +99,19 @@ void CScene_Start::Render(HDC _hdc)
 	wchar_t szPlayerPos[256] = {};
 	swprintf_s(szPlayerPos, L"Player Pos : %.2f, %.2f", PlayerPos.x, PlayerPos.y);
 	TextOut(_hdc, 0, 0, szPlayerPos, (int)wcslen(szPlayerPos));
+
+	// DEBUG - print player pos, at left top
+	wchar_t szPos[256] = {};
+	wchar_t szPos2[256] = {};
+
+	swprintf_s(szPos, L"MOUSE Pos : %.2f, %.2f", MOUSE_POS.x, MOUSE_POS.y);
+	TextOut(_hdc, 0, 20, szPos, (int)wcslen(szPos));
+	Vec2 MouseScreenPos = CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS);
+	swprintf_s(szPos2, L"MOUSE SCreen Pos : %.2f, %.2f", MouseScreenPos.x, MouseScreenPos.y);
+	TextOut(_hdc, 0, 40, szPos2, (int)wcslen(szPos2));
+	//
+
+	
 	//
 
 	if (!m_bUseForce)
@@ -150,7 +164,7 @@ void CScene_Start::Enter()
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 	// Camera Follow Player
-	CCamera::GetInstance()->SetFocus(pObj);
+	//CCamera::GetInstance()->SetFocus(pObj);
 
 
 	// Spawn Enemy

@@ -26,6 +26,19 @@ CScene_Tool::~CScene_Tool()
 void CScene_Tool::Update()
 {
 	CScene::Update();
+
+	// DEBUG - print player pos, at left top
+	wchar_t szPos[256] = {};
+	wchar_t szPos2[256] = {};
+
+	swprintf_s(szPos, L"MOUSE Pos : %.2f, %.2f", MOUSE_POS.x, MOUSE_POS.y);
+	TextOut(CCore::GetInstance()->GetMainDC(), 0, 0, szPos, (int)wcslen(szPos));
+	Vec2 MouseScreenPos = CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS);
+	swprintf_s(szPos2, L"MOUSE SCreen Pos : %.2f, %.2f", MouseScreenPos.x, MouseScreenPos.y);
+	TextOut(CCore::GetInstance()->GetMainDC(), 0, 20, szPos2, (int)wcslen(szPos2));
+	//
+
+
 	SetTileIdx();
 	if (KEY_TAP(KEY::LSHIFT))
 	{
@@ -72,7 +85,9 @@ void CScene_Tool::Enter()
 
 
 	// Move Camera
-	CCamera::GetInstance()->SetLookPos(vResolution / 2.f);
+	//CCamera::GetInstance()->SetLookPos(vResolution / 2.f);
+	//CCamera::GetInstance()->SetLookPos(Vec2());
+
 }
 
 void CScene_Tool::Exit()

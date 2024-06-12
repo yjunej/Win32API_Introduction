@@ -46,6 +46,7 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	m_hWnd = _hWnd;
 	m_ptResolution = _ptResolution;
 
+
 	// Adjust window size
 	ChangeWindowSize(Vec2((float)_ptResolution.x, (float)_ptResolution.y), false);
 

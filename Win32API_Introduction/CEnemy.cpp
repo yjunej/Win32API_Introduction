@@ -4,6 +4,7 @@
 #include "CTimeMgr.h"
 #include "CCollider.h"
 #include "AI.h"
+#include "CBullet.h"
 
 
 CEnemy::CEnemy()
@@ -36,7 +37,11 @@ void CEnemy::OnCollisionBegin(CCollider* _pOther)
 
 	if (pOtherObj->GetName() == L"PlayerBullet")
 	{
-		m_tInfo.fHP -= 1;
+		CBullet* pBullet = (CBullet*)pOtherObj;
+
+
+		m_tInfo.fHP -= pBullet->GetDamage();
+		
 		if (m_tInfo.fHP <= 0)
 		{
 			DeleteObject(this);
