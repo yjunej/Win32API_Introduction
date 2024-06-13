@@ -17,8 +17,8 @@ void DeleteVectorSafe(vector<T>& _vec)
 		{
 			delete _vec[i];
 		}
-		_vec.clear();
 	}
+	_vec.clear();
 }
 
 template<typename T, typename U>
