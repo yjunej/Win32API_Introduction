@@ -29,6 +29,7 @@ private:
 	
 	CObject* m_pFocusObj;
 	Vec2 m_vDiff; // from Center of Screen to vLookPos
+	Vec2 m_vCameraBoundary;
 
 	float m_fTime;
 	float m_fSpeed;
@@ -51,7 +52,7 @@ public:
 	void SetFocus(CObject* _p) { m_pFocusObj = _p; }
 	Vec2 ScreenPosToRenderPos(Vec2 _v) const { return _v - m_vDiff; }
 	Vec2 RenderPosToScreenPos(Vec2 _v) const { return _v + m_vDiff; }
-
+	void SetCameraBoundary(Vec2 _v) { m_vCameraBoundary = _v; }
 	void FadeIn(float _fDuration)
 	{
 		assert(0.f != _fDuration);

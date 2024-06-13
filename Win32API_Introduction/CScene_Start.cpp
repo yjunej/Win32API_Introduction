@@ -28,7 +28,9 @@ CScene_Start::CScene_Start()
 	, m_fForceRadius(500.f)
 	, m_fCurRadius(0.f)
 	, m_fForce(500.f)
+	, m_vScreenSize(Vec2(2560.f, 1440.f))
 {
+	m_vCameraBoundary = m_vScreenSize;
 }
 
 CScene_Start::~CScene_Start()
@@ -37,7 +39,7 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Update()
 {
-	LoadTile(L"tile\\1024_576.tile");
+	LoadTile(L"tile\\80_45_2560_1440.tile");
 
 	if (KEY_HOLD(KEY::LBTN))
 	{
@@ -75,6 +77,22 @@ void CScene_Start::Update()
 		}
 	}
 
+	// Block Character
+	Vec2 vCharacterPos = GetPlayer()->GetPos();
+	Vec2 vCharacterScale = GetPlayer()->GetScale();
+	POINT pt = { 0, 0 };
+	ClientToScreen(CCore::GetInstance()->GetMainHwnd(), &pt);
+
+	if (vCharacterPos.x - vCharacterScale.x / 2.f < TILE_SIZE)
+		vCharacterPos.x = TILE_SIZE + vCharacterScale.x / 2.f;
+	if (vCharacterPos.x + vCharacterScale.x / 2.f> m_vScreenSize.x - TILE_SIZE)
+		vCharacterPos.x = m_vScreenSize.x - TILE_SIZE - vCharacterScale.x/2.f;
+	if (vCharacterPos.y - vCharacterScale.y / 2.f < TILE_SIZE)
+		vCharacterPos.y = TILE_SIZE + vCharacterScale.y / 2.f;
+	if (vCharacterPos.y + vCharacterScale.y / 2.f > m_vScreenSize.y - pt.y - TILE_SIZE)
+		vCharacterPos.y = m_vScreenSize.y - pt.y -TILE_SIZE - vCharacterScale.y / 2.f ;
+	GetPlayer()->SetPos(vCharacterPos);
+
 	if (KEY_TAP(KEY::ENTER))
 	{
 		ChangeScene(SCENE_TYPE::TOOL);
@@ -107,7 +125,7 @@ void CScene_Start::Render(HDC _hdc)
 	swprintf_s(szPos, L"MOUSE Pos : %.2f, %.2f", MOUSE_POS.x, MOUSE_POS.y);
 	TextOut(_hdc, 0, 20, szPos, (int)wcslen(szPos));
 	Vec2 MouseScreenPos = CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS);
-	swprintf_s(szPos2, L"MOUSE SCreen Pos : %.2f, %.2f", MouseScreenPos.x, MouseScreenPos.y);
+	swprintf_s(szPos2, L"MOUSE Screen Pos : %.2f, %.2f", MouseScreenPos.x, MouseScreenPos.y);
 	TextOut(_hdc, 0, 40, szPos2, (int)wcslen(szPos2));
 	//
 
@@ -149,8 +167,8 @@ void CScene_Start::Enter()
 	// Add Object
 	CObject* pObj = new CPlayer;
 	pObj->SetName(L"Player");
-	pObj->SetPos(vResolution/2.f);
-	pObj->SetScale(Vec2(100.f, 100.f));
+	pObj->SetPos(m_vScreenSize/2.f);
+	pObj->SetScale(Vec2(36.f, 48.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
 	RegisterPlayer(pObj);
@@ -164,7 +182,8 @@ void CScene_Start::Enter()
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 	// Camera Follow Player
-	//CCamera::GetInstance()->SetFocus(pObj);
+	CCamera::GetInstance()->SetCameraBoundary(m_vCameraBoundary);
+	CCamera::GetInstance()->SetFocus(pObj);
 
 
 	// Spawn Enemy

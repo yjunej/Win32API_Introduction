@@ -9,6 +9,8 @@ private:
 	float m_fCurRadius;
 	bool m_bUseForce;
 	float m_fForce;
+	Vec2 m_vScreenSize;
+	Vec2 m_vCameraBoundary;
 
 
 public:

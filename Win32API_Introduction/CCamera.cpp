@@ -62,6 +62,24 @@ void CCamera::Update()
 	{
 		m_vLookPos.x += 500.f * fDT;
 	}
+
+	Vec2 vResolution = CCore::GetInstance()->GetResolution();
+	// Camera Focus Boundary
+	if (!m_vCameraBoundary.IsZero())
+	{
+		if (m_vLookPos.x < vResolution.x / 2.f)
+			m_vLookPos.x = vResolution.x / 2.f;
+		if (m_vLookPos.x > m_vCameraBoundary.x - vResolution.x / 2.f)
+			m_vLookPos.x = m_vCameraBoundary.x - vResolution.x / 2.f;
+		if (m_vLookPos.y < vResolution.y / 2.f)
+			m_vLookPos.y = vResolution.y / 2.f;
+		if (m_vLookPos.y > m_vCameraBoundary.y - vResolution.y / 2.f)
+			m_vLookPos.y = m_vCameraBoundary.y - vResolution.y / 2.f;
+
+	}
+
+
+
 	CalDiff();
 }
 

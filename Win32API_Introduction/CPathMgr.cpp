@@ -27,7 +27,7 @@ void CPathMgr::Init()
 		}
 	}
 
-	wcscat_s(m_szContentPath, 255, L"\\x64\\Release\\Content\\");
+	wcscat_s(m_szContentPath, 255, L"\\Release\\Content\\");
 
 	SetWindowText(CCore::GetInstance()->GetMainHwnd(), m_szContentPath);
 
