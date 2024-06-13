@@ -29,8 +29,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     // Check Memory Leak
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
-    //_CrtSetBreakAlloc(275);
+    //_CrtDumpMemoryLeaks()
+    //_CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG);
+    //_CrtSetBreakAlloc(426);
 
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);

@@ -41,7 +41,8 @@ public:
 		m_iCurFrm = _i;
 		m_fAccTime = 0.f;
 	}
-
+	void ResetAnim() { m_bFinish = false; m_iCurFrm= 0; }
+	int GetCurFrame() const { return m_iCurFrm; }
 	tAnimFrm& GetFrame(int _iIdx) { return m_vecFrm[_iIdx]; }
 
 private:

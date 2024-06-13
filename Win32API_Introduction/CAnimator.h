@@ -19,11 +19,13 @@ public:
 	void LoadAnimation(const wstring& _strRelPath);
 	void Play(const wstring& _strName, bool bLoop);
 
+
 	void Update();
 	void PostUpdate();
 	void Render(HDC _hdc);
 
 	CObject* GetOwner() const { return m_pOwner; }
+	CAnimation* GetCurAnimation() const { return m_pCurAnim; }
 
 public:
 	CAnimator();

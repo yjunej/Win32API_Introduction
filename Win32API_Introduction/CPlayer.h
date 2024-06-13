@@ -12,6 +12,7 @@ enum class PLAYER_STATE
 
 enum class PLAYER_ATTACK
 {
+	SWORD_ATT_1,
 	NORMAL_ATT_1,
 	//
 };
@@ -27,6 +28,8 @@ private:
 	vector<CObject*> m_vecCollObj;
 	int m_iDirection;
 	int m_iPrevDirection;
+	Vec2 m_vMove;
+
 	PLAYER_STATE m_eCurState;
 	PLAYER_STATE m_ePrevState;
 

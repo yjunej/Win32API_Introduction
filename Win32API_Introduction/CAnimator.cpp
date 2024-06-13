@@ -68,6 +68,10 @@ void CAnimator::PostUpdate()
 		{
 			m_pCurAnim->SetCurFrame(0);
 		}
+		else if (!m_bLoop && m_pCurAnim->IsFinish())
+		{
+			//m_pCurAnim->SetReplay();
+		}
 	}
 }
 

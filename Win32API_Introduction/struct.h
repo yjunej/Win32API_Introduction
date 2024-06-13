@@ -93,6 +93,12 @@ public:
 		x -= _vOther.x;
 		y -= _vOther.y;
 	}
+	bool operator ==(Vec2 _vOther)
+	{
+		if (x == _vOther.x && y == _vOther.y)
+			return true;
+		return false;
+	}
 
 public:
 	Vec2()
