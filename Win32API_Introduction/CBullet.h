@@ -18,7 +18,9 @@ public:
     void SetDirection(float _f) {m_fTheta = _f;}
     void SetDirection(Vec2 _vec) { m_vDirection = _vec.Normalize(); }
     void SetDamage(float _f) { m_fDamage = _f; }
+    void SetSpeed(float _f) { m_fSpeed = _f; }
 
+    Vec2 GetDirection() const { return m_vDirection; }
     float GetDamage() const {return m_fDamage;}
 
     virtual void OnCollisionBegin(CCollider* _pOther);

@@ -4,6 +4,7 @@ class CTraceState :
     public CState
 {
 private:
+    int m_iDirection;
 
 public:
     virtual void Update() override;

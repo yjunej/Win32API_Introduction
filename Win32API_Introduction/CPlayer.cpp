@@ -20,6 +20,7 @@
 #include "CRigidBody.h"
 #include "CGravity.h"
 #include "CCamera.h"
+#include "CArrow.h"
 
 
 CPlayer::CPlayer()
@@ -62,8 +63,8 @@ CPlayer::CPlayer()
 	GetAnimator()->CreateAnimation(L"IDLE_RIGHT_ANIM", pTexIdleRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 6);
 	GetAnimator()->CreateAnimation(L"WALK_LEFT_ANIM", pTexWalkLeft, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 8);
 	GetAnimator()->CreateAnimation(L"WALK_RIGHT_ANIM", pTexWalkRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 8);
-	GetAnimator()->CreateAnimation(L"SWORD_ATTACK_LEFT_ANIM", pTexSwordAttackLeft, Vec2(1000.f, 0.f), Vec2(200.f, 200.f), Vec2(-200.f, 0.f), 0.3f, 6);
-	GetAnimator()->CreateAnimation(L"SWORD_ATTACK_RIGHT_ANIM", pTexSwordAttackRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.3f, 6);
+	GetAnimator()->CreateAnimation(L"SWORD_ATTACK_LEFT_ANIM", pTexSwordAttackLeft, Vec2(1000.f, 0.f), Vec2(200.f, 200.f), Vec2(-200.f, 0.f), 0.1f, 6);
+	GetAnimator()->CreateAnimation(L"SWORD_ATTACK_RIGHT_ANIM", pTexSwordAttackRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 6);
 
 	//GetAnimator()->FindAnimation(L"IDLE_LEFT_ANIM")->Save(L"animation\\RedHoodIdleLeft.anim");
 	//GetAnimator()->FindAnimation(L"IDLE_RIGHT_ANIM")->Save(L"animation\\RedHoodIdleRight.anim");
@@ -193,19 +194,28 @@ void CPlayer::Fire()
 	//vPos.y -= GetScale().y / 2.f;
 
 	// Create Object
-	CBullet* pBullet = new CBullet;
-	pBullet->SetName(L"PlayerBullet");
-	pBullet->SetPos(vPos);
-	pBullet->SetScale(Vec2(25.f, 25.f));
-	pBullet->SetDamage(m_iAttackPower);
-	pBullet->SetDirection(
+	CArrow* pArrow = new CArrow;
+	pArrow->SetName(L"PlayerArrow");
+	pArrow->SetPos(vPos);
+	pArrow->SetScale(Vec2(25.f, 25.f));
+	pArrow->SetSpeed(10.f);
+	pArrow->SetDamage(m_iAttackPower);
+	pArrow->SetDirection(
 		CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS) - GetPos()
 	);
+	//CBullet* pBullet = new CBullet;
+	//pBullet->SetName(L"PlayerBullet");
+	//pBullet->SetPos(vPos);
+	//pBullet->SetScale(Vec2(25.f, 25.f));
+	//pBullet->SetDamage(m_iAttackPower);
+	//pBullet->SetDirection(
+	//	CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS) - GetPos()
+	//);
 
 	// Deprecated - Manage by EventMGr
 	//CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
 	//pCurScene->AddObject(pBullet, GROUP_TYPE::DEFAULT);
-	CreateObject(pBullet, GROUP_TYPE::PROJ_PLAYER);
+	CreateObject(pArrow, GROUP_TYPE::PROJ_PLAYER);
 }
 
 void CPlayer::UpdateState()

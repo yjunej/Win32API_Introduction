@@ -15,6 +15,8 @@ public:
 	void Load(const wstring& _strPath);
 	void Create(UINT _iWidth, UINT _iHeight);
 
+	HBITMAP GethBitmap() const { return m_hBitmap; }
+	BITMAP GetBitmap() const { return m_bitmap; }
 	UINT GetWidth() const { return (UINT)m_bitmap.bmWidth; }
 	UINT GetHeight() const { return (UINT)m_bitmap.bmHeight; }
 

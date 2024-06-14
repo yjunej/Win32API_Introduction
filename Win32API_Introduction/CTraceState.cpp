@@ -7,6 +7,7 @@
 #include "CPlayer.h"
 #include "CEnemy.h"
 #include "CTimeMgr.h"
+#include "CAnimator.h"
 
 void CTraceState::Update()
 {
@@ -17,7 +18,18 @@ void CTraceState::Update()
 	if (vToPlayer.IsZero())
 		return;
 
+	if (vToPlayer.x > 1 && m_iDirection == -1)
+	{
+		GetOwner()->GetAnimator()->Play(L"WALK_RIGHT_ANIM", true);
+		m_iDirection = 1;
+	}
+	else if (vToPlayer.x < 1 && m_iDirection == 1)
+	{
+		GetOwner()->GetAnimator()->Play(L"WALK_LEFT_ANIM", true);
+		m_iDirection = -1;
+	}
 	vToPlayer.Normalize();
+
 
 	vEnemyPos += vToPlayer * GetOwner()->GetInfo().fSpeed * fDT;
 	GetOwner()->SetPos(vEnemyPos);
@@ -33,6 +45,7 @@ void CTraceState::Exit()
 
 CTraceState::CTraceState()
 	: CState(ENEMY_STATE::TRACE)
+	, m_iDirection(-1)
 {
 }
 

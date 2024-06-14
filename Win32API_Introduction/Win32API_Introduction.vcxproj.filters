@@ -266,6 +266,9 @@
     <ClInclude Include="CSound.h">
       <Filter>Engine\06. Resource\Sound</Filter>
     </ClInclude>
+    <ClInclude Include="CArrow.h">
+      <Filter>Engine\04. Object\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -382,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="CSound.cpp">
       <Filter>Engine\06. Resource\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="CArrow.cpp">
+      <Filter>Engine\04. Object\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
