@@ -195,8 +195,8 @@ void CPlayer::OnCollisionBegin(CCollider* _pOtherColl)
 		m_iHP -= (int)tEInfo.fAttackPower;
 		if (m_iHP <= 0)
 		{
-			DeleteObject(this);
-			ChangeScene(SCENE_TYPE::STAGE_02);
+			//DeleteObject(this);
+			ChangeScene(SCENE_TYPE::GAMEOVER);
 		}
 	}
 }

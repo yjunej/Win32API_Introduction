@@ -3,6 +3,7 @@
 
 #include "CScene_Start.h"
 #include "CScene_Tool.h"
+#include "CScene_GameOver.h"
 
 CSceneMgr::CSceneMgr()
 	: m_arrScene{}
@@ -28,9 +29,12 @@ int CSceneMgr::Init()
 	// Create Start Scene
 	m_arrScene[(UINT)SCENE_TYPE::TOOL] = new CScene_Tool;
 	m_arrScene[(UINT)SCENE_TYPE::START] = new CScene_Start;
+	m_arrScene[(UINT)SCENE_TYPE::GAMEOVER] = new CScene_GameOver;
+
 
 	m_arrScene[(UINT)SCENE_TYPE::TOOL]->SetName(L"Tool Scene");
 	m_arrScene[(UINT)SCENE_TYPE::START]->SetName(L"Start Scene");
+	m_arrScene[(UINT)SCENE_TYPE::GAMEOVER]->SetName(L"GameOver Scene");
 
 	//m_arrScene[(UINT)SCENE_TYPE::STAGE_01] = new CScene_Start;
 	//m_arrScene[(UINT)SCENE_TYPE::STAGE_02] = new CScene_Start;

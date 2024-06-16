@@ -131,6 +131,9 @@
     <Filter Include="Engine\04. Object\Box">
       <UniqueIdentifier>{3f594c47-46cc-467a-b014-8721a5ca77d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\05. Scene\Scene_GameOver">
+      <UniqueIdentifier>{9c1cf91e-f97b-4c74-ae22-a67768b5d800}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32API_Introduction.h">
@@ -275,6 +278,9 @@
     <ClInclude Include="CBox.h">
       <Filter>Engine\04. Object\Box</Filter>
     </ClInclude>
+    <ClInclude Include="CScene_GameOver.h">
+      <Filter>Engine\05. Scene\Scene_GameOver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -397,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="CBox.cpp">
       <Filter>Engine\04. Object\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_GameOver.cpp">
+      <Filter>Engine\05. Scene\Scene_GameOver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

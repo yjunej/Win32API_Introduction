@@ -1,10 +1,4 @@
 
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CResource.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CResourceMgr.cpp"
-
-
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CRigidBody.cpp"
 
 
@@ -12,6 +6,9 @@
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CSceneMgr.cpp"
+
+
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CScene_GameOver.cpp"
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CScene_Start.cpp"
@@ -27,4 +24,10 @@
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CState.cpp"
+
+
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CTexture.cpp"
+
+
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CTile.cpp"
 

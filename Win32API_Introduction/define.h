@@ -53,6 +53,7 @@ enum class SCENE_TYPE
 	START,
 	STAGE_01,
 	STAGE_02,
+	GAMEOVER,
 
 	END,
 };
