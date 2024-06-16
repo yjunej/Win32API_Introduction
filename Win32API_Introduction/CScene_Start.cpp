@@ -24,6 +24,31 @@ void CScene_Start::CreateForce()
 
 }
 
+void CScene_Start::DrawHealthBar(HDC _hdc)
+{
+	// BackGround
+	Vec2 vResolution = CCore::GetInstance()->GetResolution();
+	RECT rcBackground = { 50, vResolution.y - 80, 50 + 200, vResolution.y - 80 + 20 };
+	HBRUSH hBrushBackground = CreateSolidBrush(RGB(200, 200, 200));
+	FillRect(_hdc, &rcBackground, hBrushBackground);
+	DeleteObject(hBrushBackground);
+
+	// Health Bar
+	CPlayer* pPlayer = (CPlayer*)GetPlayer();
+	int barWidth = static_cast<int>((static_cast<double>(pPlayer->GetHP()) / 100) * 200);
+	RECT rcHealth = { 50, vResolution.y - 80, 50 + barWidth, vResolution.y - 80 + 20 };
+	HBRUSH hBrushHealth = CreateSolidBrush(RGB(255, 0, 0));
+	FillRect(_hdc, &rcHealth, hBrushHealth);
+	DeleteObject(hBrushHealth);
+
+	// Border
+	HGDIOBJ hOldPen = SelectObject(_hdc, GetStockObject(BLACK_PEN));
+	SelectObject(_hdc, GetStockObject(NULL_BRUSH));
+	Rectangle(_hdc, 50, vResolution.y - 80, 50 + 200, vResolution.y - 80 + 20);
+	SelectObject(_hdc, hOldPen);
+	
+}
+
 CScene_Start::CScene_Start()
 	:m_bUseForce(false)
 	, m_fForceRadius(500.f)
@@ -125,21 +150,34 @@ void CScene_Start::Update()
 	}
 
 	m_fTimeAcc += fDT;
-	if (m_fTimeAcc += fDT)
+	if (m_fTimeAcc >= m_fEnemySpawnInterval)
 	{
-		if (m_fTimeAcc >= m_fEnemySpawnInterval)
+		m_fTimeAcc -= m_fEnemySpawnInterval;
+
+		int iRandomX = rand();
+		int iRandomY = rand();
+		Vec2 SpawnPoint = {
+			 iRandomX % int(m_vScreenSize.x), iRandomY % int(m_vScreenSize.y)
+		};
+		Vec2 vToSpawnPoint = SpawnPoint - CCamera::GetInstance()->GetCurLookPos();
+		float vDistToPlayer = (SpawnPoint - CCamera::GetInstance()->GetCurLookPos()).GetLength();
+		Vec2 vResolution = CCore::GetInstance()->GetResolution();
+		if (vDistToPlayer < (vResolution / 2.f).GetLength())
 		{
-			m_fTimeAcc -= m_fEnemySpawnInterval;
-			Vec2 SpawnPoint;
-			int iRandomX = rand();
-			int iRandomY = rand();
-
-			CEnemy* pEnemy = CEnemySpawner::SpawnEnemy(ENEMY_TYPE::NORMAL, Vec2(iRandomX % int(m_vScreenSize.x), iRandomY % int(m_vScreenSize.y)));
-			AddObject(pEnemy, GROUP_TYPE::ENEMY);
-
+			vToSpawnPoint.Normalize();
+			vToSpawnPoint *= (vResolution / 2.f).GetLength();
+			vToSpawnPoint += CCamera::GetInstance()->GetCurLookPos();
 		}
 
+
+		CEnemy* pEnemy = CEnemySpawner::SpawnEnemy(ENEMY_TYPE::NORMAL,SpawnPoint);
+		AddObject(pEnemy, GROUP_TYPE::ENEMY);
+
+		// Level Difficulty Control
+		m_fEnemySpawnInterval *= 0.98;
+
 	}
+
 }
 
 void CScene_Start::Render(HDC _hdc)
@@ -166,30 +204,31 @@ void CScene_Start::Render(HDC _hdc)
 	
 	//
 
-	if (!m_bUseForce)
+	if (m_bUseForce)
 	{
-		return;
+		SelectGDI _g1(_hdc, BRUSH_TYPE::HOLLOW);
+		SelectGDI _g2(_hdc, PEN_TYPE::GREEN);
+
+		m_fCurRadius += m_fForceRadius * 3.f * fDT;
+		if (m_fCurRadius > m_fForceRadius)
+		{
+			m_fCurRadius = 0.f;
+		}
+
+		Vec2 vRenderPos = CCamera::GetInstance()->ScreenPosToRenderPos(m_vForcePos);
+
+		Ellipse(
+			_hdc,
+			(int)(vRenderPos.x - m_fCurRadius),
+			(int)(vRenderPos.y - m_fCurRadius),
+			(int)(vRenderPos.x + m_fCurRadius),
+			(int)(vRenderPos.y + m_fCurRadius)
+		);
+
 	}
-	SelectGDI _g1(_hdc, BRUSH_TYPE::HOLLOW);
-	SelectGDI _g2(_hdc, PEN_TYPE::GREEN);
 
-	m_fCurRadius += m_fForceRadius * 3.f * fDT;
-	if (m_fCurRadius > m_fForceRadius)
-	{
-		m_fCurRadius = 0.f;
-	}
-
-	Vec2 vRenderPos = CCamera::GetInstance()->ScreenPosToRenderPos(m_vForcePos);
-
-
-	Ellipse(
-		_hdc,
-		(int)(vRenderPos.x - m_fCurRadius),
-		(int)(vRenderPos.y - m_fCurRadius),
-		(int)(vRenderPos.x + m_fCurRadius),
-		(int)(vRenderPos.y + m_fCurRadius)
-	);
-
+	// Draw Health Bar
+	DrawHealthBar(_hdc);
 
 }
 
@@ -229,7 +268,7 @@ void CScene_Start::Enter()
 			pBoxObj->SetHPUP(10.f);
 			break;
 		case 3:
-			pBoxObj->SetAttackSpeedUp(2.f);
+			pBoxObj->SetAttackSpeedUp(1.f);
 			break;
 		default:
 			break;
@@ -295,3 +334,4 @@ void CScene_Start::Exit()
 	DeleteAll();
 	CCollisionMgr::GetInstance()->Reset();
 }
+

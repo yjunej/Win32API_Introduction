@@ -65,7 +65,7 @@ void CBox::OnCollisionBegin(CCollider* _pOther)
 			pPlayer->GetNumBullets() + m_iBulletCountUp
 		);
 		pPlayer->SetHP(
-			pPlayer->GetHP() + m_fHPUp
+			 pPlayer->GetHP() + m_fHPUp < 100 ? pPlayer->GetHP() + m_fHPUp : 100.f
 		);
 		pPlayer->SetAttackSpeed(
 			pPlayer->GetAttackSpeed() + m_fAttackSpeedUp

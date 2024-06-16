@@ -21,6 +21,7 @@
 #include "CGravity.h"
 #include "CCamera.h"
 #include "CArrow.h"
+#include "CEnemy.h"
 
 
 CPlayer::CPlayer()
@@ -185,6 +186,17 @@ void CPlayer::OnCollisionBegin(CCollider* _pOtherColl)
 		if (vPos.y < pOhterObj->GetPos().y)
 		{
 			m_eCurState = PLAYER_STATE::IDLE;
+		}
+	}
+	else if ((L"Normal Enemy") == _pOtherColl->GetOwner()->GetName())
+	{
+		CEnemy* pEnemy = (CEnemy*)_pOtherColl->GetOwner();
+		const tEnemyInfo& tEInfo = pEnemy->GetInfo();
+		m_iHP -= (int)tEInfo.fAttackPower;
+		if (m_iHP <= 0)
+		{
+			DeleteObject(this);
+			ChangeScene(SCENE_TYPE::STAGE_02);
 		}
 	}
 }

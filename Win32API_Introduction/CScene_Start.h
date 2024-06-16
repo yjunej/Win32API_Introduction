@@ -24,6 +24,7 @@ public:
 
 public:
 	void CreateForce();
+	void DrawHealthBar(HDC _hdc);
 	CScene_Start();
 	~CScene_Start();
 };

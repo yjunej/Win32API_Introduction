@@ -28,7 +28,7 @@ CEnemy* CEnemySpawner::SpawnEnemy(ENEMY_TYPE _eType, Vec2 _vPos)
 	{
 		pEnemy = new CEnemy;
 		pEnemy->SetPos(_vPos);
-
+		pEnemy->SetName(L"Normal Enemy");
 		// Load Texture, Animation
 		CTexture* pTexWalkLeft = CResourceMgr::GetInstance()->LoadTexture(L"ORC_WALK_LEFT", L"texture\\OrcWalkLeft200.bmp");
 		CTexture* pTexWalkRight = CResourceMgr::GetInstance()->LoadTexture(L"ORC_WALK_RIGHT", L"texture\\OrcWalkRight200.bmp");
