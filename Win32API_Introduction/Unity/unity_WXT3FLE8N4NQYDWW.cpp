@@ -1,4 +1,7 @@
 
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CResource.cpp"
+
+
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CResourceMgr.cpp"
 
 
@@ -24,7 +27,4 @@
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CState.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CTexture.cpp"
 

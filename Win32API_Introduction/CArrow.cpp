@@ -14,6 +14,10 @@ void CArrow::Render(HDC _hdc)
 
 	// 방향 벡터를 사용하여 각도 계산
 	double angle = atan2(GetDirection().y, GetDirection().x);
+	angle += PI;
+	//angle = atan2(-1, -1);
+
+	//angle = atan2(1.f, 1.f);
 
 	// 원본 비트맵의 크기 가져오기
 	BITMAP bm = m_pTex->GetBitmap();
@@ -162,7 +166,7 @@ void CArrow::Render(HDC _hdc)
 CArrow::CArrow()
 {
 
-	m_pTex = CResourceMgr::GetInstance()->LoadTexture(L"ARROW", L"texture\\Arrow32.bmp");
+	m_pTex = CResourceMgr::GetInstance()->LoadTexture(L"ARROW", L"texture\\Arrow64.bmp");
 }
 
 CArrow::~CArrow()

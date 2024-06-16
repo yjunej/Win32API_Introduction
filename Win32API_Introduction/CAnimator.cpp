@@ -54,6 +54,18 @@ void CAnimator::Play(const wstring& _strName, bool bLoop)
 	m_bLoop = bLoop;
 }
 
+void CAnimator::SetDuration(const wstring& _animName, float _f)
+{
+	CAnimation* pAnim = FindAnimation(_animName);
+	if (nullptr == pAnim)
+		return;
+
+	for (size_t i = 0; i < pAnim->m_vecFrm.size(); i++)
+	{
+		pAnim->m_vecFrm[i].fDuration = _f;
+	}
+}
+
 void CAnimator::Update()
 {
 

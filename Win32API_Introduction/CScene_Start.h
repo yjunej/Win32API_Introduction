@@ -12,6 +12,9 @@ private:
 	Vec2 m_vScreenSize;
 	Vec2 m_vCameraBoundary;
 
+	float m_fEnemySpawnInterval;
+	float m_fTimeAcc;
+
 
 public:
 	virtual void Update() override;

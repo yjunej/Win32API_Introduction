@@ -35,7 +35,7 @@ void CEnemy::OnCollisionBegin(CCollider* _pOther)
 {
 	CObject* pOtherObj = _pOther->GetOwner();
 
-	if (pOtherObj->GetName() == L"PlayerBullet")
+	if (pOtherObj->GetName() == L"PlayerArrow")
 	{
 		CBullet* pBullet = (CBullet*)pOtherObj;
 

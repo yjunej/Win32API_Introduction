@@ -11,6 +11,9 @@
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CArrow.cpp"
 
 
+#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CBox.cpp"
+
+
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CBullet.cpp"
 
 
@@ -24,7 +27,4 @@
 
 
 #include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CCollisionMgr.cpp"
-
-
-#include "C:\Users\spz86\dev\Win32API_Introduction\Win32API_Introduction\CCore.cpp"
 

@@ -42,7 +42,7 @@ CEnemy* CEnemySpawner::SpawnEnemy(ENEMY_TYPE _eType, Vec2 _vPos)
 		tEnemyInfo info = {};
 		info.fAttackPower = 10.f;
 		info.fAttackRange = 50.f;
-		info.fLOS = 300.f;
+		info.fLOS = 3000.f;
 		info.fHP = 100.f;
 		info.fSpeed = 150.f;
 

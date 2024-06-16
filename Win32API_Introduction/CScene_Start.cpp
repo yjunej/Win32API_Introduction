@@ -16,6 +16,7 @@
 #include "CRigidBody.h"
 #include "CTimeMgr.h"
 #include "CGround.h"
+#include "CBox.h"
 
 void CScene_Start::CreateForce()
 {
@@ -29,6 +30,8 @@ CScene_Start::CScene_Start()
 	, m_fCurRadius(0.f)
 	, m_fForce(500.f)
 	, m_vScreenSize(Vec2(2560.f, 1440.f))
+	, m_fEnemySpawnInterval(5.f)
+	, m_fTimeAcc(0.f)
 {
 	m_vCameraBoundary = m_vScreenSize;
 }
@@ -75,6 +78,22 @@ void CScene_Start::Update()
 				arrObj[j]->Update();
 			}
 		}
+
+
+		// Delete Player Projectile Over screen
+		const vector<CObject*>& vecProj = GetGroupObject(GROUP_TYPE::PROJ_PLAYER);
+		for (size_t i = 0; i < vecProj.size(); i++)
+		{
+			if (vecProj[i]->GetPos().x < 0 || vecProj[i]->GetPos().x > m_vScreenSize.x ||
+				vecProj[i]->GetPos().y < 0 || vecProj[i]->GetPos().y > m_vScreenSize.y)
+			{
+				if (!vecProj[i]->IsDead())
+				{
+					DeleteObject(vecProj[i]);
+				}
+			}
+
+		}
 	}
 
 	// Block Character
@@ -105,7 +124,22 @@ void CScene_Start::Update()
 		CCamera::GetInstance()->SetLookPos(vFocusPos);
 	}
 
+	m_fTimeAcc += fDT;
+	if (m_fTimeAcc += fDT)
+	{
+		if (m_fTimeAcc >= m_fEnemySpawnInterval)
+		{
+			m_fTimeAcc -= m_fEnemySpawnInterval;
+			Vec2 SpawnPoint;
+			int iRandomX = rand();
+			int iRandomY = rand();
 
+			CEnemy* pEnemy = CEnemySpawner::SpawnEnemy(ENEMY_TYPE::NORMAL, Vec2(iRandomX % int(m_vScreenSize.x), iRandomY % int(m_vScreenSize.y)));
+			AddObject(pEnemy, GROUP_TYPE::ENEMY);
+
+		}
+
+	}
 }
 
 void CScene_Start::Render(HDC _hdc)
@@ -175,6 +209,41 @@ void CScene_Start::Enter()
 
 	// Copy Player Example
 
+
+	// Add Box
+	int iBoxCount = 20;
+	for (int i = 0; i < iBoxCount; i++)
+	{
+		CBox* pBoxObj = new CBox;
+		pBoxObj->SetName(L"Box");
+		pBoxObj->SetScale(Vec2(32.f, 32.f));
+		switch (rand() % 4)
+		{
+		case 0:
+			pBoxObj->SetBulletCountUp(2);
+			break;
+		case 1:
+			pBoxObj->SetDamageUp(10.f);
+			break;
+		case 2:
+			pBoxObj->SetHPUP(10.f);
+			break;
+		case 3:
+			pBoxObj->SetAttackSpeedUp(2.f);
+			break;
+		default:
+			break;
+		}
+		pBoxObj->SetPos(
+			Vec2(
+			rand() % (int)(m_vScreenSize.x - 32.f),
+			rand() % (int)(m_vScreenSize.x - 32.f)));
+
+
+		AddObject((CObject*)pBoxObj, GROUP_TYPE::ITEM);
+	}
+
+
 	//CObject* pOtherPlayer = pObj->Clone();
 	//pOtherPlayer->SetPos(Vec2(
 	//	pOtherPlayer->GetPos().x + pOtherPlayer->GetScale().x,
@@ -207,6 +276,8 @@ void CScene_Start::Enter()
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::ENEMY);
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PROJ_PLAYER, GROUP_TYPE::ENEMY);
 	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::GROUND);
+	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::ITEM);
+
 
 	// Set Camera
 	CCamera::GetInstance()->SetLookPos(vResolution / 2.f);

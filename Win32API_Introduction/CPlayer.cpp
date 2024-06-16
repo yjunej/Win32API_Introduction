@@ -28,9 +28,12 @@ CPlayer::CPlayer()
 	, m_ePrevState(PLAYER_STATE::WALK)
 	, m_iAttackPower(10)
 	, m_iDirection(-1)
-	, m_fAttackSpeed(2.f)
+	, m_iPrevDirection(-1)
+	, m_fAttackSpeed(1.f)
 	, m_iHP(100)
 	, m_fAccTime(0.f)
+	, m_iNumBullets(1)
+	, m_bCanFire(true)
 {
     
     CreateCollider();
@@ -42,8 +45,8 @@ CPlayer::CPlayer()
 	CTexture* pTexIdleRight = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_RIGHT", L"texture\\SoldierIdleRight200.bmp");
 	CTexture* pTexWalkLeft = CResourceMgr::GetInstance()->LoadTexture(L"WALK_LEFT", L"texture\\SoldierWalkLeft200.bmp");
 	CTexture* pTexWalkRight = CResourceMgr::GetInstance()->LoadTexture(L"WALK_RIGHT", L"texture\\SoldierWalkRight200.bmp");
-	CTexture* pTexSwordAttackLeft = CResourceMgr::GetInstance()->LoadTexture(L"SWORD_ATTACK_LEFT", L"texture\\SoldierSwordAttackLeft200.bmp");
-	CTexture* pTexSwordAttackRight = CResourceMgr::GetInstance()->LoadTexture(L"SWORD_ATTACK_RIGHT", L"texture\\SoldierSwordAttackRight200.bmp");
+	CTexture* pTexBowAttackLeft = CResourceMgr::GetInstance()->LoadTexture(L"BOW_ATTACK_LEFT", L"texture\\SoldierBowAttackLeft200.bmp");
+	CTexture* pTexBowAttackRight = CResourceMgr::GetInstance()->LoadTexture(L"BOW_ATTACK_RIGHT", L"texture\\SoldierBowAttackRight200.bmp");
 
 	//CTexture* pTexIdleRight = CResourceMgr::GetInstance()->LoadTexture(L"IDLE_RIGHT", L"texture\\RedHoodIdleRight.bmp");
 
@@ -53,18 +56,15 @@ CPlayer::CPlayer()
 
 	CreateAnimator();
 
-	// Load Animation
-	//GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleLeft.anim");
-	//GetAnimator()->LoadAnimation(L"animation\\RedHoodIdleRight.anim");
-	//GetAnimator()->LoadAnimation(L"animation\\RedHoodAttackRight.anim");
-
-	//GetAnimator()->CreateAnimation(L"ATTACK_RIGHT_ANIM", pTexAttackRight, Vec2(0.f, 0.f), Vec2(80.f, 80.f), Vec2(80.f, 0.f), 0.05f, 26);
 	GetAnimator()->CreateAnimation(L"IDLE_LEFT_ANIM", pTexIdleLeft, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 6);
 	GetAnimator()->CreateAnimation(L"IDLE_RIGHT_ANIM", pTexIdleRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 6);
 	GetAnimator()->CreateAnimation(L"WALK_LEFT_ANIM", pTexWalkLeft, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 8);
 	GetAnimator()->CreateAnimation(L"WALK_RIGHT_ANIM", pTexWalkRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 8);
-	GetAnimator()->CreateAnimation(L"SWORD_ATTACK_LEFT_ANIM", pTexSwordAttackLeft, Vec2(1000.f, 0.f), Vec2(200.f, 200.f), Vec2(-200.f, 0.f), 0.1f, 6);
-	GetAnimator()->CreateAnimation(L"SWORD_ATTACK_RIGHT_ANIM", pTexSwordAttackRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 6);
+	//GetAnimator()->CreateAnimation(L"SWORD_ATTACK_LEFT_ANIM", pTexSwordAttackLeft, Vec2(1000.f, 0.f), Vec2(200.f, 200.f), Vec2(-200.f, 0.f), 0.1f, 6);
+	//GetAnimator()->CreateAnimation(L"SWORD_ATTACK_RIGHT_ANIM", pTexSwordAttackRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 0.1f, 6);
+	GetAnimator()->CreateAnimation(L"BOW_ATTACK_LEFT_ANIM", pTexBowAttackLeft, Vec2(1600.f, 0.f), Vec2(200.f, 200.f), Vec2(-200.f, 0.f), 1 / GetAttackSpeed() / 9.f, 9);
+	GetAnimator()->CreateAnimation(L"BOW_ATTACK_RIGHT_ANIM", pTexBowAttackRight, Vec2(0.f, 0.f), Vec2(200.f, 200.f), Vec2(200.f, 0.f), 1 / GetAttackSpeed() / 9.f, 9);
+
 
 	//GetAnimator()->FindAnimation(L"IDLE_LEFT_ANIM")->Save(L"animation\\RedHoodIdleLeft.anim");
 	//GetAnimator()->FindAnimation(L"IDLE_RIGHT_ANIM")->Save(L"animation\\RedHoodIdleRight.anim");
@@ -110,10 +110,11 @@ void CPlayer::Update()
 	//SetPos(vPos);
 	GetAnimator()->Update();
 
-	if ((GetAnimator()->GetCurAnimation()->GetName()).find(L"SWORD") != wstring::npos
-		&& GetAnimator()->GetCurAnimation()->GetCurFrame() == 3)
+	if ((GetAnimator()->GetCurAnimation()->GetName()).find(L"ATTACK") != wstring::npos
+		&& GetAnimator()->GetCurAnimation()->GetCurFrame() == 8 && m_bCanFire)
 	{
 		Fire();
+		m_bCanFire = false;
 	}
 
 	m_ePrevState = m_eCurState;
@@ -194,15 +195,31 @@ void CPlayer::Fire()
 	//vPos.y -= GetScale().y / 2.f;
 
 	// Create Object
-	CArrow* pArrow = new CArrow;
-	pArrow->SetName(L"PlayerArrow");
-	pArrow->SetPos(vPos);
-	pArrow->SetScale(Vec2(25.f, 25.f));
-	pArrow->SetSpeed(10.f);
-	pArrow->SetDamage(m_iAttackPower);
-	pArrow->SetDirection(
-		CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS) - GetPos()
-	);
+
+	Vec2 vDirection = CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS) - GetPos();
+	float baseAngle = atan2(vDirection.y, vDirection.x);
+	float DEG_TO_RAD = PI / 180.0;
+	float BASE_ANGLE_OFFSET = 10.0; // 각도 간격 (10도)
+	int midBulletIndex = GetNumBullets() / 2;
+	for (int i = 0; i < GetNumBullets(); i++)
+	{
+		float angleOffset = (i - midBulletIndex) * BASE_ANGLE_OFFSET;
+		float angleRad = baseAngle + angleOffset * DEG_TO_RAD;
+		Vec2 newDirection = {
+		int(cos(angleRad)* vDirection.GetLength()),
+		int(sin(angleRad)* vDirection.GetLength())
+		};
+		CArrow* pArrow = new CArrow;
+		pArrow->SetName(L"PlayerArrow");
+		pArrow->SetPos(vPos);
+		pArrow->SetScale(Vec2(50.f, 50.f));
+		pArrow->SetSpeed(600.f);
+		pArrow->SetDamage(GetAttackPower());
+		pArrow->SetDirection(newDirection);
+		CreateObject(pArrow, GROUP_TYPE::PROJ_PLAYER);
+
+	}
+
 	//CBullet* pBullet = new CBullet;
 	//pBullet->SetName(L"PlayerBullet");
 	//pBullet->SetPos(vPos);
@@ -215,7 +232,6 @@ void CPlayer::Fire()
 	// Deprecated - Manage by EventMGr
 	//CScene* pCurScene = CSceneMgr::GetInstance()->GetCurScene();
 	//pCurScene->AddObject(pBullet, GROUP_TYPE::DEFAULT);
-	CreateObject(pArrow, GROUP_TYPE::PROJ_PLAYER);
 }
 
 void CPlayer::UpdateState()
@@ -414,14 +430,16 @@ void CPlayer::UpdateAnimation()
 		{
 			break;
 		}
-		if (m_iDirection == 1)
+		m_bCanFire = true;
+		if (CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS).x > GetPos().x)
 		{
-			GetAnimator()->Play(L"SWORD_ATTACK_RIGHT_ANIM", false);
+
+			GetAnimator()->Play(L"BOW_ATTACK_RIGHT_ANIM", false);
 			GetAnimator()->GetCurAnimation()->ResetAnim();
 		}
 		else
 		{
-			GetAnimator()->Play(L"SWORD_ATTACK_LEFT_ANIM", false);
+			GetAnimator()->Play(L"BOW_ATTACK_LEFT_ANIM", false);
 			GetAnimator()->GetCurAnimation()->ResetAnim();
 		}
 	}

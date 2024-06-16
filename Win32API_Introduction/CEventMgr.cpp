@@ -21,7 +21,8 @@ void CEventMgr::Update()
 {
 	for (size_t i = 0; i < m_vecDead.size(); ++i)
 	{
-		delete m_vecDead[i];
+		if (nullptr != m_vecDead[i])
+  			delete m_vecDead[i];
 	}
 	m_vecDead.clear();
 
@@ -49,11 +50,12 @@ void CEventMgr::Execute(const tEvent& _event)
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
 		// lParam: Object Addr 
-
 		CObject* pDeadObj = (CObject*)_event.lParam;
 		pDeadObj->SetDead();
-		m_vecDead.push_back(pDeadObj);
-
+		if (find(m_vecDead.begin(), m_vecDead.end(), pDeadObj) == m_vecDead.end())
+		{
+			m_vecDead.push_back(pDeadObj);
+		}
 		break;
 	}
 	case EVENT_TYPE::SCENE_CHANGE:

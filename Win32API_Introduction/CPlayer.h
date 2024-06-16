@@ -29,6 +29,7 @@ private:
 	int m_iDirection;
 	int m_iPrevDirection;
 	Vec2 m_vMove;
+	bool m_bCanFire;
 
 	PLAYER_STATE m_eCurState;
 	PLAYER_STATE m_ePrevState;
@@ -36,9 +37,11 @@ private:
 	float m_fAccTime;
 
 	// Stat
-	int m_iAttackPower = 0;
-	float m_fAttackSpeed = 0; // Attack per sec
-	int m_iHP = 0;
+	int m_iAttackPower;
+	float m_fAttackSpeed; // Attack per sec
+	int m_iHP;
+	int m_iNumBullets;
+
 
 public:
 	virtual void Update() override;
@@ -51,6 +54,14 @@ public:
 
 
 
+	int GetAttackPower() const { return m_iAttackPower; }
+	void SetAttackPower(int val) { m_iAttackPower = val; }
+	float GetAttackSpeed() const { return m_fAttackSpeed; }
+	void SetAttackSpeed(float val) { m_fAttackSpeed = val; }
+	int GetHP() const { return m_iHP; }
+	void SetHP(int val) { m_iHP = val; }
+	int GetNumBullets() const { return m_iNumBullets; }
+	void SetNumBullets(int val) { m_iNumBullets = val; }
 	// Covariant return type
 	virtual CLONE(CPlayer)
 
@@ -60,6 +71,8 @@ private:
 	void UpdateMove();
 	void UpdateAnimation();
 	void UpdateGravity();
+
+	
 
 public:
 	CPlayer();

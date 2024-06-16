@@ -13,6 +13,7 @@ using std::wstring;
 #include <list>
 using std::list;
 
+//#include <cmath>
 
 #include <map>
 using std::map;

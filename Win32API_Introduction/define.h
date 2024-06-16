@@ -41,6 +41,7 @@ enum class GROUP_TYPE
 	ENEMY,
 	PROJ_PLAYER,
 	PROJ_ENEMY,
+	ITEM,
 
 	UI = 31,
 	END = 32,

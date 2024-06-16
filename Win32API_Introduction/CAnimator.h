@@ -19,6 +19,8 @@ public:
 	void LoadAnimation(const wstring& _strRelPath);
 	void Play(const wstring& _strName, bool bLoop);
 
+	void SetDuration(const wstring& _animName, float _f);
+
 
 	void Update();
 	void PostUpdate();

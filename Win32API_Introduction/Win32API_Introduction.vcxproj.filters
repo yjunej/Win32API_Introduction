@@ -128,6 +128,9 @@
     <Filter Include="Engine\03. Manager\SoundMgr">
       <UniqueIdentifier>{65d7034e-c784-4ca8-804c-529fcd43c8cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\Box">
+      <UniqueIdentifier>{3f594c47-46cc-467a-b014-8721a5ca77d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win32API_Introduction.h">
@@ -269,6 +272,9 @@
     <ClInclude Include="CArrow.h">
       <Filter>Engine\04. Object\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="CBox.h">
+      <Filter>Engine\04. Object\Box</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCore.cpp">
@@ -388,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="CArrow.cpp">
       <Filter>Engine\04. Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CBox.cpp">
+      <Filter>Engine\04. Object\Box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
