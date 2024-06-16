@@ -185,20 +185,20 @@ void CScene_Start::Render(HDC _hdc)
 	CScene::Render(_hdc);
 
 	// DEBUG - print player pos, at left top
-	Vec2 PlayerPos = GetPlayer()->GetPos(); // .x float, .y float
-	wchar_t szPlayerPos[256] = {};
-	swprintf_s(szPlayerPos, L"Player Pos : %.2f, %.2f", PlayerPos.x, PlayerPos.y);
-	TextOut(_hdc, 0, 0, szPlayerPos, (int)wcslen(szPlayerPos));
+	//Vec2 PlayerPos = GetPlayer()->GetPos(); // .x float, .y float
+	//wchar_t szPlayerPos[256] = {};
+	//swprintf_s(szPlayerPos, L"Player Pos : %.2f, %.2f", PlayerPos.x, PlayerPos.y);
+	//TextOut(_hdc, 0, 0, szPlayerPos, (int)wcslen(szPlayerPos));
 
-	// DEBUG - print player pos, at left top
-	wchar_t szPos[256] = {};
-	wchar_t szPos2[256] = {};
+	//// DEBUG - print player pos, at left top
+	//wchar_t szPos[256] = {};
+	//wchar_t szPos2[256] = {};
 
-	swprintf_s(szPos, L"MOUSE Pos : %.2f, %.2f", MOUSE_POS.x, MOUSE_POS.y);
-	TextOut(_hdc, 0, 20, szPos, (int)wcslen(szPos));
-	Vec2 MouseScreenPos = CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS);
-	swprintf_s(szPos2, L"MOUSE Screen Pos : %.2f, %.2f", MouseScreenPos.x, MouseScreenPos.y);
-	TextOut(_hdc, 0, 40, szPos2, (int)wcslen(szPos2));
+	//swprintf_s(szPos, L"MOUSE Pos : %.2f, %.2f", MOUSE_POS.x, MOUSE_POS.y);
+	//TextOut(_hdc, 0, 20, szPos, (int)wcslen(szPos));
+	//Vec2 MouseScreenPos = CCamera::GetInstance()->RenderPosToScreenPos(MOUSE_POS);
+	//swprintf_s(szPos2, L"MOUSE Screen Pos : %.2f, %.2f", MouseScreenPos.x, MouseScreenPos.y);
+	//TextOut(_hdc, 0, 40, szPos2, (int)wcslen(szPos2));
 	//
 
 	

@@ -52,13 +52,13 @@ void CCollider::Render(HDC _hdc)
 
 	Vec2 vRenderPos = CCamera::GetInstance()->ScreenPosToRenderPos(m_vCollPos);
 
-	Rectangle(
-		_hdc,
-		(int)(vRenderPos.x - m_vScale.x / 2.f),
-		(int)(vRenderPos.y - m_vScale.y / 2.f),
-		(int)(vRenderPos.x + m_vScale.x / 2.f),
-		(int)(vRenderPos.y + m_vScale.y / 2.f)
-	);
+	//Rectangle(
+	//	_hdc,
+	//	(int)(vRenderPos.x - m_vScale.x / 2.f),
+	//	(int)(vRenderPos.y - m_vScale.y / 2.f),
+	//	(int)(vRenderPos.x + m_vScale.x / 2.f),
+	//	(int)(vRenderPos.y + m_vScale.y / 2.f)
+	//);
 
 }
 
